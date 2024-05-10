@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 
 public class GameStateManager : StateManager<GameStateManager.CoreStates>
@@ -12,14 +12,21 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         Pause,
         Transition
     }
+    GameState gameState;
+    PauseState pauseState;
 
     [SerializeField] List<GameObject> GameplayUI = new List<GameObject>();
     [SerializeField] List<GameObject> PauseUI = new List<GameObject>();
 
+    [SerializeField] TMP_Text timer;
+
+    bool ispaused = false;
+
     GameStateManager() {
 
-        GameState gameState = new GameState(CoreStates.Gameplay);
-        PauseState pauseState = new PauseState(CoreStates.Pause);
+        gameState = new GameState(CoreStates.Gameplay);
+        pauseState = new PauseState(CoreStates.Pause);
+
         gameState.ShowUI = GameplayUI;
         gameState.HideUI = PauseUI;
 
@@ -33,8 +40,21 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
 
     private void Awake()
     {
-        currentState = States[CoreStates.Pause];
+        gameState.timer = timer;
+        currentState = States[CoreStates.Gameplay];
+    }
 
+    private void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            currentState.cantransition = true;
+            ispaused = !ispaused;
+
+            print(ispaused);
+        }
     }
 }
 
@@ -42,12 +62,10 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 {
     public List<GameObject> ShowUI = new List<GameObject>();
     public List<GameObject> HideUI = new List<GameObject>();
-
+    public TMP_Text timer;
 
     public GameState(GameStateManager.CoreStates key) : base(key)
-    {
-
-    }
+    {}
 
     public override void EnterState()
     {
@@ -69,11 +87,33 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 
     public override GameStateManager.CoreStates GetNextState()
     {
+        if (cantransition)
+        {
+            cantransition = false;
             return GameStateManager.CoreStates.Pause;
+        }
+
+        return GameStateManager.CoreStates.Gameplay;
     }
 
     public override void UpdateState()
     {
+        if (timer != null)
+        {
+            float totalSeconds = Time.timeSinceLevelLoad;
+
+            int seconds = Mathf.FloorToInt(totalSeconds);
+            int milliseconds = Mathf.FloorToInt((totalSeconds - seconds) * 1000f);
+            milliseconds = (int)(milliseconds / 10);
+
+            string formattedTime = string.Format("{0:00}:{1:00}", seconds, milliseconds);
+
+            timer.text = formattedTime;
+        }
+        else
+        {
+            Debug.Log("no timer");
+        }
     }
 }
 
@@ -90,6 +130,7 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
     public override void EnterState()
     {
         Debug.Log("Paused");
+
         foreach (GameObject go in ShowUI)
         {
             go.SetActive(true);
@@ -98,6 +139,7 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
         {
             go.SetActive(false);
         }
+        Time.timeScale = 0f;
     }
 
     public override void ExitState()
@@ -107,11 +149,19 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
 
     public override GameStateManager.CoreStates GetNextState()
     {
-        return GameStateManager.CoreStates.Gameplay;
+        if (cantransition)
+        {
+            cantransition = false;
+            Time.timeScale = 1f;
+            return GameStateManager.CoreStates.Gameplay;
+        }
+
+        return GameStateManager.CoreStates.Pause;
+
+        
     }
 
     public override void UpdateState()
     {
-        Debug.Log("paused!!");
     }
 }

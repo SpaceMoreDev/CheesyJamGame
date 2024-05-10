@@ -15,7 +15,7 @@ public class StateManager<EState> : MonoBehaviour where EState : Enum
         currentState.EnterState();
     }
 
-    private void Update()
+    public void Update()
     {
         EState nextStateKey = currentState.GetNextState();
 
@@ -27,10 +27,7 @@ public class StateManager<EState> : MonoBehaviour where EState : Enum
             }
             else
             {
-                if (currentState.cantransition)
-                {
-                    TransitionToState(nextStateKey);
-                }
+                TransitionToState(nextStateKey);
             }
         }
     }
