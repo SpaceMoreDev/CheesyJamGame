@@ -25,6 +25,7 @@ public class Player_Movement : MonoBehaviour
     {
         charcont = GetComponent<CharacterController>();
         playerBody = transform;
+        Shooting.e_ShotObject += oba;
     }
 
     // Update is called once per frame
@@ -48,5 +49,12 @@ public class Player_Movement : MonoBehaviour
     {
         charcont.Move(Move * Speed * Time.fixedDeltaTime);
     }
-
+    void oba(GameObject oba)
+    {
+        Debug.Log("OBAAAAAAAAAAA");
+    }
+    private void OnDestroy()
+    {
+        Shooting.e_ShotObject -= oba;
+    }
 }
