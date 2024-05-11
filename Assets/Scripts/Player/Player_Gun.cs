@@ -21,7 +21,7 @@ public class Player_Gun : MonoBehaviour
         Quaternion newRotation = camera.transform.rotation;
         transform.DORotateQuaternion(newRotation, speed);
 
-        print(transform.localEulerAngles.x);
+        //print(transform.localEulerAngles.x);
 
         if (transform.localEulerAngles.x > 40 && transform.localEulerAngles.x < 300)
         {
