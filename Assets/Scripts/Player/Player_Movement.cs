@@ -29,21 +29,24 @@ public class Player_Movement : MonoBehaviour
 
     // Update is called once per frame
 
-
-    //FixedUpdate
-    void FixedUpdate()
+    private void Update()
     {
         hor = Input.GetAxis("Horizontal");
         vert = Input.GetAxis("Vertical");
 
-        Move = new Vector3 (hor,0,vert);
+        Move = new Vector3(hor, 0, vert);
 
         camforward = mycam.transform.forward;
         camright = mycam.transform.right;
 
         Move = vert * camforward + hor * camright;
         Move.y = 0f;
-        charcont.Move(Move * Speed * Time.deltaTime);
+    }
+
+    //FixedUpdate
+    void FixedUpdate()
+    {
+        charcont.Move(Move * Speed * Time.fixedDeltaTime);
     }
 
 }

@@ -10,12 +10,14 @@ public class Camera_Look : MonoBehaviour
     private Transform playerBody;
 
     private float xRot = 10f;
+    private float yRot = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
         playerBody = transform;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -24,10 +26,12 @@ public class Camera_Look : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
+        yRot += mouseX;
         xRot -= mouseY;
-        xRot = Mathf.Clamp(xRot, -90f, 90f);
-        mycam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
 
-        playerBody.Rotate(Vector3.up * mouseX);
+        xRot = Mathf.Clamp(xRot, -90f, 90f);
+        mycam.transform.localRotation = Quaternion.Euler(xRot, yRot, 0f);
+
+        //playerBody.Rotate(Vector3.up * mouseX);
     }
 }
