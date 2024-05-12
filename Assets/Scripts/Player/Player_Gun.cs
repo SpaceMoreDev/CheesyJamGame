@@ -7,33 +7,19 @@ using UnityEngine;
 public class Player_Gun : MonoBehaviour
 {
     Camera camera;
-    [SerializeField] private float speed;
-    [SerializeField] private float distanceLookingDown;
-    [SerializeField] private float distanceNormal = 0.51f;
-
+    [SerializeField] private float smoothingFactor;
+    [SerializeField] private Vector3 positionOffset;
 
     void Start()
     {
         camera = Camera.main;
     }
-    private void LateUpdate()
+
+    private void FixedUpdate()
     {
+        transform.position = Camera.main.transform.position;
+
         Quaternion newRotation = camera.transform.rotation;
-        transform.DORotateQuaternion(newRotation, speed);
-
-        //print(transform.localEulerAngles.x);
-
-        if (transform.localEulerAngles.x > 40 && transform.localEulerAngles.x < 300)
-        {
-            transform.GetChild(0).DOLocalMoveZ(distanceLookingDown, 1);
-            transform.GetChild(0).DOLocalMoveY(-0.81f, 1);
-        }
-        else
-        {
-            transform.GetChild(0).DOLocalMoveZ(distanceNormal, 1);
-            transform.GetChild(0).DOLocalMoveY(-0.11f, 1);
-        }
-
-
+        transform.DORotateQuaternion(newRotation, smoothingFactor).SetEase(Ease.Linear);
     }
 }

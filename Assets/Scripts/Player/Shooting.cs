@@ -12,9 +12,11 @@ public class Shooting : MonoBehaviour
     public GameObject gun;
     public Camera mycam;
 
-    private Animator gunanim;
+    [SerializeField] private Animator gunanim;
+
     private Vector3 dir;
     private string entag;
+
     private RaycastHit hit;
     private GameObject hitobj;
 
@@ -22,14 +24,15 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gunanim = gun.GetComponent<Animator>();
-        entag = "Piss";
+        //gunanim = gun.GetComponent<Animator>();
+        entag = "Enemy";
     }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             gunanim.SetTrigger("isfiring");
+
             if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
                 hitobj = hit.collider.gameObject;
@@ -37,19 +40,11 @@ public class Shooting : MonoBehaviour
                 //Debug.DrawRay(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 //Debug.Log($"Did Hit {hitobj.name}");
                 StartBlasting(hitobj);
-                //gunanim.SetTrigger("isfiring");
+
                 if (hitobj.CompareTag(entag))
                 {
-                    Destroy(hitobj);
-
-
+                    hitobj.transform.position = new Vector3(0, -50f, 0);
                 }
-            }
-            else
-            {
-                //gunanim.SetTrigger("isfiring");
-                //Debug.DrawRay(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward) * 1000, Color.green);
-                //Debug.Log("Did Not Hit");
             }
             
         }

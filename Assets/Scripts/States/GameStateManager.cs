@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 
 public class GameStateManager : StateManager<GameStateManager.CoreStates>
@@ -18,7 +19,7 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     [SerializeField] List<GameObject> GameplayUI = new List<GameObject>();
     [SerializeField] List<GameObject> PauseUI = new List<GameObject>();
 
-    [SerializeField] TMP_Text timer;
+    [SerializeField] Text timer;
 
     bool ispaused = false;
 
@@ -52,8 +53,6 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         {
             currentState.cantransition = true;
             ispaused = !ispaused;
-
-            print(ispaused);
         }
     }
 }
@@ -62,14 +61,15 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 {
     public List<GameObject> ShowUI = new List<GameObject>();
     public List<GameObject> HideUI = new List<GameObject>();
-    public TMP_Text timer;
+    public Text timer;
 
+    private float timerValue = 0f;
     public GameState(GameStateManager.CoreStates key) : base(key)
     {}
 
     public override void EnterState()
     {
-        Debug.Log("Gameplay");
+        //Debug.Log("Gameplay");
         foreach (GameObject go in ShowUI)
         {
             go.SetActive(true);
@@ -103,16 +103,11 @@ public class GameState : BaseState<GameStateManager.CoreStates>
             float totalSeconds = Time.timeSinceLevelLoad;
 
             int seconds = Mathf.FloorToInt(totalSeconds);
-            int milliseconds = Mathf.FloorToInt((totalSeconds - seconds) * 1000f);
-            milliseconds = (int)(milliseconds / 10);
+            int minutes = Mathf.FloorToInt(totalSeconds / 60f);
 
-            string formattedTime = string.Format("{0:00}:{1:00}", seconds, milliseconds);
+            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
 
             timer.text = formattedTime;
-        }
-        else
-        {
-            Debug.Log("no timer");
         }
     }
 }
@@ -129,7 +124,7 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
-        Debug.Log("Paused");
+        //Debug.Log("Paused");
 
         foreach (GameObject go in ShowUI)
         {
