@@ -9,37 +9,19 @@ public class Player_knockback : MonoBehaviour
 {
 
     public GameObject mycam;
-    public GameObject enemy;
     public float pushforce;
 
-    private bool shouldpush = false;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision col)
     {
-        float dist = Vector3.Distance(enemy.transform.position, transform.position);
-        //Debug.Log(dist);
-        if (dist < 2f && shouldpush)
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Oh yeah");
-            this.GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -1);
+            GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
         }
     }
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-
-        if(hit.gameObject.CompareTag("Enemy"))
-        {
-            shouldpush = true;
-            enemy = hit.gameObject;
-        }
-           
-        
-
-    }
+    
 }

@@ -9,9 +9,7 @@ public class Player_Movement : MonoBehaviour
     public float Speed = 10f;
     public Camera mycam;
 
-    private Transform playerBody;
-    //private Rigidbody rb;
-    private CharacterController charcont;
+    private Rigidbody rb;
 
     private Vector3 Move;
     private Vector3 camforward;
@@ -23,8 +21,7 @@ public class Player_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        charcont = GetComponent<CharacterController>();
-        playerBody = transform;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,13 +36,15 @@ public class Player_Movement : MonoBehaviour
         camforward = mycam.transform.forward;
         camright = mycam.transform.right;
 
+       
         Move = vert * camforward + hor * camright;
-        Move.y = 0f;
+        
     }
 
     //FixedUpdate
     void FixedUpdate()
     {
-        charcont.Move(Move * Speed * Time.fixedDeltaTime);
+        Vector3 curvel = new Vector3(Move.x, 0, Move.z);
+        rb.MovePosition(curvel * Speed * Time.fixedDeltaTime + transform.position);
     }
 }
