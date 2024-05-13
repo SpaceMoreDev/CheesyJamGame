@@ -24,6 +24,7 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mycam = Camera.main;
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
     }
@@ -40,13 +41,14 @@ public class Shooting : MonoBehaviour
                 //Debug.DrawRay(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 //Debug.Log($"Did Hit {hitobj.name}");
                 StartBlasting(hitobj);
-
+                
                 if (hitobj.CompareTag(entag))
                 {
                     hitobj.transform.position = new Vector3(0, -50f, 0);
                 }
             }
-            
+            Cinemachine_Shake.Instance.ShakeCamera(2f, .1f);
+
         }
     }
     public static void StartBlasting(GameObject myobj)
