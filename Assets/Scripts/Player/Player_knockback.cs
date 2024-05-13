@@ -8,13 +8,13 @@ using UnityEngine.WSA;
 public class Player_knockback : MonoBehaviour
 {
 
-    public GameObject mycam;
+    public Camera mycam;
     public float pushforce;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mycam = Camera.main;
     }
     private void OnCollisionEnter(Collision col)
     {
