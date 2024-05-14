@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IBox {
+    bool opened { get; }
     void Begin();
 }
 
 public class CounterOpen : MonoBehaviour, IInteract, IBox
 {
-    [SerializeField] private bool opened = false;
+    public bool opened { set; get; }
     public GameObject currentCheese;
+    public Cheese cheeseSc;
     public bool spawned { get { return currentCheese.activeSelf; } }
     bool canspawn { get { return LevelManager.spawnables[gameObject]; } }
 
@@ -19,6 +21,7 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
 
     private void Awake()
     {
+        opened = false;
         LevelManager.spawnables.Add(gameObject,false);
 
         currentCheese.SetActive(false);
@@ -32,6 +35,7 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
         if (canspawn)
         {
             currentCheese.SetActive(true);
+            cheeseSc = currentCheese.transform.GetChild(0).GetComponent<Cheese>();
         }
     }
 
@@ -49,5 +53,9 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
         }
         opened = !opened;
 
+        if (opened)
+        {
+            print("opened container");
+        }
     }
 }

@@ -43,7 +43,10 @@ public class Shooting : MonoBehaviour
 
                 if (hitobj.CompareTag(entag))
                 {
-                    hitobj.transform.position = new Vector3(0, -50f, 0);
+                    if (hitobj.TryGetComponent<Monster>(out Monster monster))
+                    {
+                        monster.Die();
+                    }
                 }
             }
             

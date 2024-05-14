@@ -12,7 +12,7 @@ public class Interact : MonoBehaviour
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 100f))
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 10f,8))
             {
                 if (hit.collider.gameObject.TryGetComponent<IInteract>(out IInteract interactedObj))
                 {

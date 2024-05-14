@@ -8,28 +8,27 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject EnemyPrefab;
     [SerializeField] List<Transform> spawnLocations = new List<Transform>();
     bool enemyActive = false;
-    static public GameObject Monster;
+    static public GameObject monster;
+    static public Monster monsterSc;
     private float maxWaiTime = 10f;
+
+    private static SpawnManager instance;
 
     private void Awake()
     {
-        Monster = Instantiate(EnemyPrefab, transform);
+        instance = this;
+        monster = Instantiate(EnemyPrefab, transform);
+        monster.transform.position = new Vector3(0, -50f, 0);
+        monsterSc = monster.GetComponent<Monster>();
     }
 
-    private void Start()
+    public static void SetMonsterSpawn()
     {
-        StartCoroutine(Spawn());
-    }
-
-    public IEnumerator Spawn()
-    {
-        float randomWait = Random.Range(3f, maxWaiTime);
-        yield return new WaitForSeconds(randomWait);
-
-        int randompoint = Random.Range(0, spawnLocations.Count);
-        Monster.transform.position = spawnLocations[randompoint].position;
-
-        StartCoroutine(Spawn());
+        if (monsterSc.isAlive)
+        {
+            int randompoint = Random.Range(0, instance.spawnLocations.Count);
+            monsterSc.navMesh.Warp(instance.spawnLocations[randompoint].position);
+        }
     }
 
 }
