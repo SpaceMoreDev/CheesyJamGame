@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Monster : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Monster : MonoBehaviour
     private bool canMove = false;
     public Transform target;
     private IInteract targetBox;
+    private bool isEscaping = false;
 
     private void Start()
     {
@@ -54,6 +56,7 @@ public class Monster : MonoBehaviour
     void checkTarget()
     {
         float minDistance = Mathf.Infinity;
+        target = null;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, visionArea, targetLayers);
 
         foreach (Collider collider in hitColliders)
@@ -68,12 +71,33 @@ public class Monster : MonoBehaviour
                         minDistance = distance;
                         target = collider.transform;
                     }
+
                 }
             }
         }
         if (target != null)
         {
             navMesh.destination = target.position;
+            canMove = true; // will be set via animation later on
+        }
+        else {
+
+            minDistance = Mathf.Infinity;
+            Collider[] exits = Physics.OverlapSphere(transform.position, visionArea, 1 << 6);
+
+            foreach (Collider collider in exits)
+            {
+                float distance = Vector3.Distance(transform.position, collider.transform.position);
+                if (distance < minDistance)
+                { 
+                    minDistance = distance;
+                    target = collider.transform;
+                }
+            }
+
+            navMesh.destination = target.position;
+
+            isEscaping = true;
             canMove = true; // will be set via animation later on
         }
 
@@ -105,20 +129,27 @@ public class Monster : MonoBehaviour
 
     private void Reached()
     {
-        if (target.TryGetComponent<IInteract>(out IInteract box))
+        if (!isEscaping)
         {
-            box.interact();
-
-            if (target.TryGetComponent<CounterOpen>(out CounterOpen counter))
+            if (target.TryGetComponent<IInteract>(out IInteract box))
             {
-                if (counter.spawned)
+                box.interact();
+
+                if (target.TryGetComponent<CounterOpen>(out CounterOpen counter))
                 {
-                    counter.cheeseSc.interact();
+                    if (counter.spawned)
+                    {
+                        counter.cheeseSc.interact();
+                    }
                 }
             }
-        }
 
-        StartCoroutine(SearchDelay());
+            StartCoroutine(SearchDelay());
+        }
+        else
+        {
+            navMesh.Warp(new Vector3(0, -50f, 0));
+        }
     }
 
 }
