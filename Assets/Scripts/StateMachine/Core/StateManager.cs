@@ -10,7 +10,7 @@ public class StateManager<EState> : MonoBehaviour where EState : Enum
     static public BaseState<EState> currentState;
     protected bool IsTransitioningState = false;
 
-    private void Start()
+    public void Start()
     {
         currentState.EnterState();
     }

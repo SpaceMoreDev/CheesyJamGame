@@ -6,16 +6,17 @@ TagManager:
   tags:
   - Enemy
   - Piss
+  - Box
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - Transition
-  - interactable
-  - 
+  - Spawners
+  - Interactable
+  - Collectable
   - 
   - 
   - 
