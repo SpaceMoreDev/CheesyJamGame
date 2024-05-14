@@ -115,7 +115,6 @@ public class Monster : MonoBehaviour
     {
         if (canMove)
         {
-            print(navMesh.remainingDistance);
             if (navMesh.remainingDistance <= navMesh.stoppingDistance)
             {
                 if (ReachedDestination != null)

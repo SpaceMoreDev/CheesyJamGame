@@ -9,7 +9,7 @@ public class Cheese : MonoBehaviour, IInteract
 
     public void interact()
     {
-        Destroy(gameObject);
+        transform.parent.gameObject.SetActive(false);
         GameState.collectedCheese++;
         print($"collected {GameState.collectedCheese}/{GameState.cheeseCount} cheese!");
     }
