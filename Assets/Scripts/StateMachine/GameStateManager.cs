@@ -45,6 +45,13 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         currentState = States[CoreStates.Gameplay];
     }
 
+    private void Start()
+    {
+        base.Start();
+        DontDestroyOnLoad(gameObject);
+
+    }
+
     private void Update()
     {
         base.Update();
