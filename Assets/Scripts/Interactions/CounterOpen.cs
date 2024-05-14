@@ -12,18 +12,21 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
     [SerializeField] private bool opened = false;
     public GameObject currentCheese;
     public bool spawned { get { return currentCheese.activeSelf; } }
-    bool canspawn { get { return spawnables[gameObject]; } }
+    bool canspawn { get { return LevelManager.spawnables[gameObject]; } }
 
-    public static Dictionary<GameObject,bool> spawnables = new Dictionary<GameObject, bool>();
+    private Quaternion initialRotation;
 
 
     private void Awake()
     {
-        spawnables.Add(gameObject,false);
+        LevelManager.spawnables.Add(gameObject,false);
 
         currentCheese.SetActive(false);
     }
-
+    private void Start()
+    {
+        initialRotation = transform.rotation;
+    }
     public void Begin()
     {
         if (canspawn)
@@ -36,11 +39,13 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
     {
         if (opened) 
         {
-            transform.DORotate(new Vector3(0, 0, 0), 1, RotateMode.LocalAxisAdd);
+            Quaternion targetRotation = Quaternion.AngleAxis(0f, transform.up) * initialRotation;
+            transform.DORotateQuaternion(targetRotation, 1);
         }
         else 
         {
-            transform.DORotate(new Vector3(0, 90, 0), 1,RotateMode.LocalAxisAdd);
+            Quaternion targetRotation = Quaternion.AngleAxis(90f, transform.up) * initialRotation;
+            transform.DORotateQuaternion(targetRotation, 1);
         }
         opened = !opened;
 

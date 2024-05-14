@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static Dictionary<GameObject, bool> spawnables = new Dictionary<GameObject, bool>();
     public int NumberOfCheese = 3;
     void Start()
     {
@@ -12,16 +13,16 @@ public class LevelManager : MonoBehaviour
 
         for (int i = 0; i < indexes.Length; i++)
         {
-            indexes[i] = UnityEngine.Random.Range(0, CounterOpen.spawnables.Count);
+            indexes[i] = UnityEngine.Random.Range(0, spawnables.Count);
 
             while (!indexes.Contains(indexes[i]))
             {
-                indexes[i] = UnityEngine.Random.Range(0, CounterOpen.spawnables.Count);
+                indexes[i] = UnityEngine.Random.Range(0, spawnables.Count);
             }
             
         }
 
-        List<GameObject> keys = new List<GameObject>(CounterOpen.spawnables.Keys);
+        List<GameObject> keys = new List<GameObject>(spawnables.Keys);
         int d = 0;
         foreach (var spawn in keys)
         {
@@ -29,7 +30,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (d == indexes[i])
                 {
-                    CounterOpen.spawnables[spawn] = true;
+                    spawnables[spawn] = true;
                 }
             }
             d++;
