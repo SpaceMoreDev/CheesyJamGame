@@ -1,8 +1,9 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class Shooting : MonoBehaviour
 {
     //i added a variable that is basically the tag to customize it perhaps
@@ -13,6 +14,8 @@ public class Shooting : MonoBehaviour
     public Camera mycam;
 
     [SerializeField] private Animator gunanim;
+    
+    private CinemachineImpulseSource impulseSource;
 
     private Vector3 dir;
     private string entag;
@@ -21,10 +24,12 @@ public class Shooting : MonoBehaviour
     private GameObject hitobj;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
         mycam = Camera.main;
+        impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
     }
@@ -50,7 +55,8 @@ public class Shooting : MonoBehaviour
                     }
                 }
             }
-            Cinemachine_Shake.Instance.ShakeCamera(2f, .1f);
+            CameraShakeManager.instance.CameraShake(impulseSource);
+            //Cinemachine_Shake.Instance.ShakeCamera(2f, .1f);
 
         }
     }
