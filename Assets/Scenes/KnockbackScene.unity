@@ -533,64 +533,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCheese: {fileID: 0}
   cheeseSc: {fileID: 0}
---- !u!1 &292082955 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5634903779734102912, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-  m_PrefabInstance: {fileID: 4652181756881017267}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &292082959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292082955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 1
-    m_CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
-    m_ImpulseType: 0
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: 0, z: -1}
 --- !u!1 &322690734
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,11 +585,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCheese: {fileID: 0}
   cheeseSc: {fileID: 0}
---- !u!1 &418717631 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3480481781254011380, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-  m_PrefabInstance: {fileID: 4652181756881017267}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &460354103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,24 +1726,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 460354104}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &1465866932 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3148165427621380097, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-  m_PrefabInstance: {fileID: 4652181756881017267}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1465866936
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465866932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Damping: 0
 --- !u!1 &1567490070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,64 +2058,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1788069840 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4242362894150807583, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-  m_PrefabInstance: {fileID: 4652181756881017267}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1788069843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788069840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_ImpulseShape: 1
-    m_CustomImpulseShape:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
-    m_ImpulseType: 0
-    m_DissipationRate: 0.25
-    m_RawSignal: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.7
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 100
-    m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: 0, z: -1}
 --- !u!1 &1791719713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,42 +2605,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4145502116441904235, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: field of view
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145502116441904235, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: far clip plane
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145502116441904235, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: near clip plane
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5677263187889714378, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: profile
-      value: 
-      objectReference: {fileID: 11400000, guid: add5dc09fde4d9a4894dcc440cc3515d, type: 2}
-    - target: {fileID: 6995847931851860817, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995847931851860817, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995847931851860817, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995847931851860817, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6995847931851860817, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
     - target: {fileID: 7900590033056475968, guid: e78c2e4b8529b024483d767057020f50, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.7770481
@@ -2820,86 +2645,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8244924050994186253, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_AmplitudeGain
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8244924050994186253, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_FrequencyGain
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700033929050948630, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.527
-      objectReference: {fileID: 0}
-    - target: {fileID: 8700033929050948630, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.884
-      objectReference: {fileID: 0}
     - target: {fileID: 8754458714844441499, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      propertyPath: mycam
+      propertyPath: profile
       value: 
-      objectReference: {fileID: 4652181756881017268}
+      objectReference: {fileID: 11400000, guid: 9272b3d5b8adc1444b3bc1d0954680b0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3480481781254011380, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4652181756881017273}
-    - targetCorrespondingSourceObject: {fileID: 3480481781254011380, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4652181756881017274}
-    - targetCorrespondingSourceObject: {fileID: 3148165427621380097, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1465866936}
-    - targetCorrespondingSourceObject: {fileID: 5634903779734102912, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 292082959}
-    - targetCorrespondingSourceObject: {fileID: 4242362894150807583, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1788069843}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e78c2e4b8529b024483d767057020f50, type: 3}
---- !u!20 &4652181756881017268 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4145502116441904235, guid: e78c2e4b8529b024483d767057020f50, type: 3}
-  m_PrefabInstance: {fileID: 4652181756881017267}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4652181756881017273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418717631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 152e31b1a439e6a4aa8daf339485fe1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4652181756881017274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418717631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ApplyAfter: 2
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseCameraSpace: 1
-  m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
-    m_AmplitudeGain: 4
-    m_FrequencyGain: 3
-    m_Duration: 0.5
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
