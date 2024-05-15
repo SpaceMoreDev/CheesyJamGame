@@ -52,7 +52,11 @@ public class Monster : MonoBehaviour
     IEnumerator SearchDelay()
     {
         yield return new WaitForSeconds(searchDelay);
-        checkTarget();
+        if (isAlive)
+        {
+           checkTarget(); 
+        }
+        
     }
 
     
@@ -145,14 +149,14 @@ public class Monster : MonoBehaviour
         {
             if (target.TryGetComponent<IInteract>(out IInteract box))
             {
-                box.interact();
+                box.interact(gameObject);
                 animator.Play("Interact");
 
                 if (target.TryGetComponent<CounterOpen>(out CounterOpen counter))
                 {
                     if (counter.spawned)
                     {
-                        counter.cheeseSc.interact();
+                        counter.cheeseSc.interact(gameObject);
                         animator.SetTrigger("Eating");
                     }
                 }

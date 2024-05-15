@@ -2,24 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseState : BaseState<GameStateManager.CoreStates>
+public class GameOverState : BaseState<GameStateManager.CoreStates>
 {
-    public GameObject ShowUI;
 
-    public PauseState(GameStateManager.CoreStates key) : base(key)
-    {
-
-    }
+    private float timerValue = 0f;
+    public GameOverState(GameStateManager.CoreStates key) : base(key)
+    {}
 
     public override void EnterState()
     {
-        //Debug.Log("Paused");
-        Time.timeScale = 0f;
     }
 
     public override void ExitState()
     {
-        Debug.Log("-X- Left pause state");
+        Debug.Log("-X- Left GameOver state");
     }
 
     public override GameStateManager.CoreStates GetNextState()
@@ -27,16 +23,14 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
         if (cantransition)
         {
             cantransition = false;
-            Time.timeScale = 1f;
             return GameStateManager.CoreStates.Gameplay;
         }
 
-        return GameStateManager.CoreStates.Pause;
-
-
+        return GameStateManager.CoreStates.GameOver;
     }
 
     public override void UpdateState()
     {
+
     }
 }

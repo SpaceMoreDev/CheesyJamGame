@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public interface IInteract {
-    void interact();
+    void interact(GameObject caller);
 }
 
 public class Interact : MonoBehaviour
@@ -17,7 +17,7 @@ public class Interact : MonoBehaviour
             {
                 if (hit.collider.gameObject.TryGetComponent<IInteract>(out IInteract interactedObj))
                 {
-                    interactedObj.interact();
+                    interactedObj.interact(gameObject);
                 }
             }
         }

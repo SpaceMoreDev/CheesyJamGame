@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 
 public class GameStateManager : StateManager<GameStateManager.CoreStates>
@@ -11,15 +12,20 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     {
         Gameplay,
         Pause,
-        Transition
+        GameOver
     }
+
+    
+
     GameState gameState;
     PauseState pauseState;
+    GameOverState gameoverState;
 
-    [SerializeField] List<GameObject> GameplayUI = new List<GameObject>();
-    [SerializeField] List<GameObject> PauseUI = new List<GameObject>();
-
-    [SerializeField] Text timer;
+    [SerializeField] GameObject GameplayUI;
+    [SerializeField] GameObject PauseUI;
+    [SerializeField] GameObject GameOverUI;
+    [SerializeField] Text Timer;
+    [SerializeField] Text Collected;
 
     bool ispaused = false;
 
@@ -27,21 +33,43 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
 
         gameState = new GameState(CoreStates.Gameplay);
         pauseState = new PauseState(CoreStates.Pause);
-
-        gameState.ShowUI = GameplayUI;
-        gameState.HideUI = PauseUI;
-
-        pauseState.ShowUI = PauseUI;
-        pauseState.HideUI = GameplayUI;
+        gameoverState = new GameOverState(CoreStates.GameOver);
 
         States.Add(CoreStates.Gameplay, gameState);
         States.Add(CoreStates.Pause, pauseState);
+        States.Add(CoreStates.GameOver, gameoverState);
+        SwitchState += ShowUI;
+    }
 
+    private void OnDestroy()
+    {
+        SwitchState -= ShowUI;
+    }
+
+    private void ShowUI(CoreStates state)
+    {
+        PauseUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        GameplayUI.SetActive(false);
+
+        switch (state)
+        {
+            case CoreStates.Gameplay:
+                GameplayUI.SetActive(true);
+                break;
+            case CoreStates.Pause:
+                PauseUI.SetActive(true);
+                break;
+            case CoreStates.GameOver:
+                GameOverUI.SetActive(true);
+                break;
+        }
     }
 
     private void Awake()
     {
-        gameState.timer = timer;
+        gameState.timer = Timer;
+        gameState.Collected = Collected;
         currentState = States[CoreStates.Gameplay];
     }
 

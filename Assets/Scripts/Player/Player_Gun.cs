@@ -7,19 +7,24 @@ using UnityEngine;
 public class Player_Gun : MonoBehaviour
 {
     Camera camera;
-    [SerializeField] private float smoothingFactor;
     [SerializeField] private Vector3 positionOffset;
+    private float smoothingFactor = 10;
+
+    Quaternion newRotation;
 
     void Start()
     {
         camera = Camera.main;
+        newRotation = camera.transform.rotation;
+        
+
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        transform.position = Camera.main.transform.position;
+        transform.position = camera.transform.position;
+        newRotation = camera.transform.rotation;
 
-        Quaternion newRotation = camera.transform.rotation;
-        transform.DORotateQuaternion(newRotation, smoothingFactor).SetEase(Ease.Linear);
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, Time.deltaTime * smoothingFactor);
     }
 }

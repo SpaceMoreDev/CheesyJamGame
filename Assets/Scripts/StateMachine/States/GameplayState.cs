@@ -5,28 +5,51 @@ using UnityEngine.UI;
 
 public class GameState : BaseState<GameStateManager.CoreStates>
 {
-    public List<GameObject> ShowUI = new List<GameObject>();
-    public List<GameObject> HideUI = new List<GameObject>();
+    public GameObject ShowUI;
     public Text timer;
+    public Text Collected;
 
-    public static int cheeseCount = 0;
-    public static int collectedCheese = 0;
+    public int cheeseCount = 0;
+    private int collected = 0;
+
+    public static GameState instance;
+    public static int collectedCheese { 
+        set { 
+            instance.collected = value;
+            instance.ChangeText();
+        }
+        get { 
+            return instance.collected; 
+        } 
+    }
+
+    public static int CheeseInGame
+    {
+        set
+        {
+            instance.cheeseCount = value;
+            instance.ChangeText();
+        }
+        get
+        {
+            return instance.cheeseCount;
+        }
+    }
 
     private float timerValue = 0f;
     public GameState(GameStateManager.CoreStates key) : base(key)
-    { }
+    {
+        instance = this;
+    }
 
     public override void EnterState()
     {
-        Debug.Log($"cheese: {cheeseCount}");
-        foreach (GameObject go in ShowUI)
-        {
-            go.SetActive(true);
-        }
-        foreach (GameObject go in HideUI)
-        {
-            go.SetActive(false);
-        }
+        collectedCheese = 0;
+    }
+
+    private void ChangeText()
+    {
+        Collected.text = $"COLLECT THE CHEESE {collected}/{cheeseCount}";
     }
 
     public override void ExitState()

@@ -4,13 +4,20 @@ public class Cheese : MonoBehaviour, IInteract
 {
     private void Awake()
     {
-        GameState.cheeseCount++;
+        GameState.CheeseInGame++;
     }
 
-    public void interact()
+    public void interact(GameObject caller)
     {
-        transform.parent.gameObject.SetActive(false);
-        GameState.collectedCheese++;
-        print($"collected {GameState.collectedCheese}/{GameState.cheeseCount} cheese!");
+        if (caller.tag != "Enemy")
+        {
+            transform.parent.gameObject.SetActive(false);
+            GameState.collectedCheese++;
+        }
+        else
+        {
+            transform.parent.gameObject.SetActive(false);
+            GameState.CheeseInGame--;
+        }
     }
 }

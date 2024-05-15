@@ -39,7 +39,7 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
         }
     }
 
-    public void interact()
+    public void interact(GameObject caller)
     {
         if (opened) 
         {
@@ -48,7 +48,7 @@ public class CounterOpen : MonoBehaviour, IInteract, IBox
         }
         else 
         {
-            Quaternion targetRotation = Quaternion.AngleAxis(90f, transform.up) * initialRotation;
+            Quaternion targetRotation = Quaternion.AngleAxis(-90f, transform.up) * initialRotation;
             transform.DORotateQuaternion(targetRotation, 1);
         }
         opened = !opened;
