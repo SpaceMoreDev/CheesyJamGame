@@ -4,13 +4,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu (menuName = "ScreenShake/New Profile")]
-public class NewBehaviourScript : ScriptableObject
+public class ScreenShakeProfile : ScriptableObject
 {
     [Header("Impulse Source Settings")]
     public float impactTime = 0.2f;
     public float impactforce = 1f;
     public Vector3 defaultVelocity = new Vector3(0f, -1f, 0f);
-    public AnimationCurve Curve;
+    public AnimationCurve impulseCurve;
 
     [Header("Impulse Listener Settings")]
     public float listeneramplitude = 1f;

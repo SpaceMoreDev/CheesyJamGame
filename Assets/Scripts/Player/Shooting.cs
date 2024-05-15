@@ -6,7 +6,7 @@ using UnityEngine;
 using Cinemachine;
 public class Shooting : MonoBehaviour
 {
-    //i added a variable that is basically the tag to customize it perhaps
+    
 
     public static event Action<GameObject> e_ShotObject;
 
@@ -14,10 +14,10 @@ public class Shooting : MonoBehaviour
     public Camera mycam;
 
     [SerializeField] private Animator gunanim;
-    
+    [SerializeField] ScreenShakeProfile profile;
+
     private CinemachineImpulseSource impulseSource;
 
-    private Vector3 dir;
     private string entag;
 
     private RaycastHit hit;
@@ -55,8 +55,7 @@ public class Shooting : MonoBehaviour
                     }
                 }
             }
-            CameraShakeManager.instance.CameraShake(impulseSource);
-            //Cinemachine_Shake.Instance.ShakeCamera(2f, .1f);
+            CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
 
         }
     }
