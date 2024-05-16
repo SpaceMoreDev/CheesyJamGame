@@ -71,7 +71,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 300
+  m_AngularSpeed: 100
   m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -914920009301730810, guid: ddc5c768b776e5e4da208a5dd956c188, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d228f4cb4c429f46abf88c53a99b0e7, type: 2}
     - target: {fileID: 919132149155446097, guid: ddc5c768b776e5e4da208a5dd956c188, type: 3}
       propertyPath: m_Name
       value: Monster

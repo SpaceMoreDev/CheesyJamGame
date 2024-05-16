@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class Cheese : MonoBehaviour, IInteract
 {
-    private void Awake()
+
+    private void OnEnable()
     {
         GameState.CheeseInGame++;
     }
+
 
     public void interact(GameObject caller)
     {
         if (caller.tag != "Enemy")
         {
-            transform.parent.gameObject.SetActive(false);
-            GameState.collectedCheese++;
+            if (Trolly.instance.cheeseCarried < 2)
+            {
+                transform.parent.gameObject.SetActive(false);
+                Trolly.instance.cheeseCarried++;
+            }
         }
         else
         {
