@@ -1,11 +1,12 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 public class Shooting : MonoBehaviour
 {
-    //i added a variable that is basically the tag to customize it perhaps
+    
 
     public static event Action<GameObject> e_ShotObject;
 
@@ -13,17 +14,22 @@ public class Shooting : MonoBehaviour
     public Camera mycam;
 
     [SerializeField] private Animator gunanim;
+    [SerializeField] ScreenShakeProfile profile;
 
-    private Vector3 dir;
+    private CinemachineImpulseSource impulseSource;
+
     private string entag;
 
     private RaycastHit hit;
     private GameObject hitobj;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+        mycam = Camera.main;
+        impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
     }
@@ -40,7 +46,7 @@ public class Shooting : MonoBehaviour
                 //Debug.DrawRay(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
                 //Debug.Log($"Did Hit {hitobj.name}");
                 StartBlasting(hitobj);
-
+                
                 if (hitobj.CompareTag(entag))
                 {
                     if (hitobj.TryGetComponent<Monster>(out Monster monster))
@@ -49,7 +55,8 @@ public class Shooting : MonoBehaviour
                     }
                 }
             }
-            
+            CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+
         }
     }
     public static void StartBlasting(GameObject myobj)

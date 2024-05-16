@@ -15,6 +15,7 @@ public class Camera_Look : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mycam = Camera.main;
         playerBody = transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
