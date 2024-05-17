@@ -55,7 +55,11 @@ public class Shooting : MonoBehaviour
                     }
                 }
             }
-            CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+            if (CameraShakeManager.instance != null)
+            {
+                CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+
+            }
 
         }
     }
