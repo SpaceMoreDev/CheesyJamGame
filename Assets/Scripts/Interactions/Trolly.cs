@@ -47,6 +47,11 @@ public class Trolly : MonoBehaviour, IInteract
             Interact.holding = true;
             playerTransform = caller.transform;
         }
+        else
+        {
+            cheeseCarried--;
+            GameState.CheeseInGame--;
+        }
     }
 
     private void Update()

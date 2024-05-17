@@ -11,6 +11,8 @@ public class GameOverState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public override void ExitState()

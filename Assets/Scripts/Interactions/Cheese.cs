@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class Cheese : MonoBehaviour, IInteract
 {
-
+    [SerializeField] bool countable = true;
     private void OnEnable()
     {
-        GameState.CheeseInGame++;
+        if (countable)
+        {
+            GameState.CheeseInGame++;
+        }
     }
 
 

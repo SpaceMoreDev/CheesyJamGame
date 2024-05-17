@@ -9,6 +9,9 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public Text timer;
     public Text Collected;
 
+    public bool isGameOver = false;
+    public bool isGameWin = false;
+
     public int cheeseCount = 0;
     private int collected = 0;
 
@@ -17,6 +20,12 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         set { 
             instance.collected = value;
             instance.ChangeText();
+
+            if (value == CheeseInGame)
+            {
+                instance.isGameWin = true;
+                Debug.Log("Won the game!!");
+            }
         }
         get { 
             return instance.collected; 
@@ -28,6 +37,12 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         set
         {
             instance.cheeseCount = value;
+
+            if (value == 0)
+            {
+                instance.isGameOver = true;
+            }
+
             instance.ChangeText();
         }
         get
@@ -44,7 +59,8 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
-        collectedCheese = 0;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void ChangeText()
@@ -63,6 +79,10 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         {
             cantransition = false;
             return GameStateManager.CoreStates.Pause;
+        }
+        if (isGameOver)
+        {
+            return GameStateManager.CoreStates.GameOver;
         }
 
         return GameStateManager.CoreStates.Gameplay;

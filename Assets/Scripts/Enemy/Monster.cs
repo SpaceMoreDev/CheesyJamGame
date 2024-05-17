@@ -52,6 +52,7 @@ public class Monster : MonoBehaviour
     IEnumerator SearchDelay()
     {
         yield return new WaitForSeconds(searchDelay);
+
         if (isAlive)
         {
            checkTarget(); 
@@ -79,6 +80,19 @@ public class Monster : MonoBehaviour
                         target = collider.transform;
                     }
 
+                }
+                else if (collider.TryGetComponent(out Trolly trolly))
+                {
+                    if (trolly.cheeseCarried > 0 && !Interact.holding)
+                    {
+                        minDistance = distance;
+                        target = collider.transform;
+                    }
+                }
+                else
+                {
+                    minDistance = distance;
+                    target = collider.transform;
                 }
             }
         }
@@ -159,6 +173,14 @@ public class Monster : MonoBehaviour
                         counter.cheeseSc.interact(gameObject);
                         animator.SetTrigger("Eating");
                     }
+                }
+                else if (target.TryGetComponent<Cheese>(out Cheese cheese))
+                {
+                    animator.SetTrigger("Eating");
+                }
+                else if (target.TryGetComponent<Trolly>(out Trolly trolly))
+                {
+                    animator.SetTrigger("Eating");
                 }
             }
 

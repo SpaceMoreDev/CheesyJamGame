@@ -13,7 +13,9 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
-        //Debug.Log("Paused");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         Time.timeScale = 0f;
     }
 
