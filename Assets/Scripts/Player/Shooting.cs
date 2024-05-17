@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor.PackageManager;
 public class Shooting : MonoBehaviour
 {
     
@@ -12,7 +13,8 @@ public class Shooting : MonoBehaviour
 
     public GameObject gun;
     public Camera mycam;
-
+    public GameObject player;
+    [SerializeField] private GameObject _bulletholeprefab;
     [SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
 
@@ -22,12 +24,14 @@ public class Shooting : MonoBehaviour
 
     private RaycastHit hit;
     private GameObject hitobj;
+    private int layermask;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        layermask = 1 << 3;
         mycam = Camera.main;
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
@@ -39,11 +43,12 @@ public class Shooting : MonoBehaviour
         {
             gunanim.SetTrigger("isfiring");
 
-            if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+            if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity,~layermask))
             {
                 hitobj = hit.collider.gameObject;
 
-                //Debug.DrawRay(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward) * hit.distance, Color.red);
+                Debug.DrawRay(hit.point, -mycam.transform.TransformDirection(Vector3.forward), Color.red,10f);
+
                 //Debug.Log($"Did Hit {hitobj.name}");
                 StartBlasting(hitobj);
                 
@@ -54,6 +59,16 @@ public class Shooting : MonoBehaviour
                         monster.Die();
                     }
                 }
+                if(!hit.collider.gameObject.CompareTag(entag)||!hit.collider.gameObject.CompareTag(player.tag))
+                {
+                    //Instantiating the bullet hole object
+                    GameObject obj = Instantiate(original: _bulletholeprefab, hit.point, Quaternion.LookRotation(hit.normal));
+
+                    //Modifying the position so it looks better
+                    obj.transform.position += obj.transform.forward / 300;
+                    Destroy(obj, 3f);
+                }
+                
             }
             if (CameraShakeManager.instance != null)
             {
