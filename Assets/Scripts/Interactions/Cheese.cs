@@ -2,15 +2,30 @@ using UnityEngine;
 
 public class Cheese : MonoBehaviour, IInteract
 {
-    private void Awake()
+    [SerializeField] bool countable = true;
+    private void OnEnable()
     {
-        GameState.cheeseCount++;
+        if (countable)
+        {
+            GameState.CheeseInGame++;
+        }
     }
 
-    public void interact()
+
+    public void interact(GameObject caller)
     {
-        transform.parent.gameObject.SetActive(false);
-        GameState.collectedCheese++;
-        print($"collected {GameState.collectedCheese}/{GameState.cheeseCount} cheese!");
+        if (caller.tag != "Enemy")
+        {
+            if (Trolly.instance.cheeseCarried < 2)
+            {
+                transform.parent.gameObject.SetActive(false);
+                Trolly.instance.cheeseCarried++;
+            }
+        }
+        else
+        {
+            transform.parent.gameObject.SetActive(false);
+            GameState.CheeseInGame--;
+        }
     }
 }

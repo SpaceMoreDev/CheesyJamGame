@@ -5,28 +5,67 @@ using UnityEngine.UI;
 
 public class GameState : BaseState<GameStateManager.CoreStates>
 {
-    public List<GameObject> ShowUI = new List<GameObject>();
-    public List<GameObject> HideUI = new List<GameObject>();
+    public GameObject ShowUI;
     public Text timer;
+    public Text Collected;
 
-    public static int cheeseCount = 0;
-    public static int collectedCheese = 0;
+    public bool isGameOver = false;
+    public bool isGameWin = false;
+
+    public int cheeseCount = 0;
+    private int collected = 0;
+
+    public static GameState instance;
+    public static int collectedCheese { 
+        set { 
+            instance.collected = value;
+            instance.ChangeText();
+
+            if (value == CheeseInGame)
+            {
+                instance.isGameWin = true;
+                Debug.Log("Won the game!!");
+            }
+        }
+        get { 
+            return instance.collected; 
+        } 
+    }
+
+    public static int CheeseInGame
+    {
+        set
+        {
+            instance.cheeseCount = value;
+
+            if (value == 0)
+            {
+                instance.isGameOver = true;
+            }
+
+            instance.ChangeText();
+        }
+        get
+        {
+            return instance.cheeseCount;
+        }
+    }
 
     private float timerValue = 0f;
     public GameState(GameStateManager.CoreStates key) : base(key)
-    { }
+    {
+        instance = this;
+    }
 
     public override void EnterState()
     {
-        Debug.Log($"cheese: {cheeseCount}");
-        foreach (GameObject go in ShowUI)
-        {
-            go.SetActive(true);
-        }
-        foreach (GameObject go in HideUI)
-        {
-            go.SetActive(false);
-        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void ChangeText()
+    {
+        Collected.text = $"COLLECT THE CHEESE {collected}/{cheeseCount}";
     }
 
     public override void ExitState()
@@ -40,6 +79,10 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         {
             cantransition = false;
             return GameStateManager.CoreStates.Pause;
+        }
+        if (isGameOver)
+        {
+            return GameStateManager.CoreStates.GameOver;
         }
 
         return GameStateManager.CoreStates.Gameplay;

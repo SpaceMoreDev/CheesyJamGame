@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Piss
   - Box
+  - Trolly
+  - InUse
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - Spawners
   - Interactable
   - Collectable
-  - 
-  - 
-  - 
+  - End
+  - Ignore
+  - Gun/Hand
   - 
   - 
   - 

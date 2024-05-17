@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,13 +13,15 @@ public class Monster : MonoBehaviour
     public float maxTimeToRespawn = 20f;
     public float searchDelay = 5f;
     public static event Action ReachedDestination;
+    [HideInInspector] public NavMeshAgent navMesh;
+    public Animator animator;
 
     [SerializeField] private float visionArea = 20f;
     [SerializeField] private float movementSpeed = 1f;
     [SerializeField] private LayerMask targetLayers;
-    public NavMeshAgent navMesh;
+
     private bool canMove = false;
-    public Transform target;
+    private Transform target;
     private IInteract targetBox;
     private bool isEscaping = false;
 
@@ -49,7 +52,12 @@ public class Monster : MonoBehaviour
     IEnumerator SearchDelay()
     {
         yield return new WaitForSeconds(searchDelay);
-        checkTarget();
+
+        if (isAlive)
+        {
+           checkTarget(); 
+        }
+        
     }
 
     
@@ -73,11 +81,25 @@ public class Monster : MonoBehaviour
                     }
 
                 }
+                else if (collider.TryGetComponent(out Trolly trolly))
+                {
+                    if (trolly.cheeseCarried > 0 && !Interact.holding)
+                    {
+                        minDistance = distance;
+                        target = collider.transform;
+                    }
+                }
+                else
+                {
+                    minDistance = distance;
+                    target = collider.transform;
+                }
             }
         }
         if (target != null)
         {
             navMesh.destination = target.position;
+            animator.SetBool("isMoving", true);
             canMove = true; // will be set via animation later on
         }
         else {
@@ -98,6 +120,7 @@ public class Monster : MonoBehaviour
             navMesh.destination = target.position;
 
             isEscaping = true;
+            animator.SetBool("isMoving", true);
             canMove = true; // will be set via animation later on
         }
 
@@ -115,6 +138,7 @@ public class Monster : MonoBehaviour
     {
         if (canMove)
         {
+
             if (navMesh.remainingDistance <= navMesh.stoppingDistance)
             {
                 if (ReachedDestination != null)
@@ -128,18 +152,35 @@ public class Monster : MonoBehaviour
 
     private void Reached()
     {
+
+        navMesh.isStopped = true;
+        navMesh.ResetPath();
+
+        animator.SetBool("isMoving", false);
+
+
         if (!isEscaping)
         {
             if (target.TryGetComponent<IInteract>(out IInteract box))
             {
-                box.interact();
+                box.interact(gameObject);
+                animator.Play("Interact");
 
                 if (target.TryGetComponent<CounterOpen>(out CounterOpen counter))
                 {
                     if (counter.spawned)
                     {
-                        counter.cheeseSc.interact();
+                        counter.cheeseSc.interact(gameObject);
+                        animator.SetTrigger("Eating");
                     }
+                }
+                else if (target.TryGetComponent<Cheese>(out Cheese cheese))
+                {
+                    animator.SetTrigger("Eating");
+                }
+                else if (target.TryGetComponent<Trolly>(out Trolly trolly))
+                {
+                    animator.SetTrigger("Eating");
                 }
             }
 

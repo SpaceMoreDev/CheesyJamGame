@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PauseState : BaseState<GameStateManager.CoreStates>
 {
-    public List<GameObject> ShowUI = new List<GameObject>();
-    public List<GameObject> HideUI = new List<GameObject>();
+    public GameObject ShowUI;
 
     public PauseState(GameStateManager.CoreStates key) : base(key)
     {
@@ -14,16 +13,9 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
-        //Debug.Log("Paused");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-        foreach (GameObject go in ShowUI)
-        {
-            go.SetActive(true);
-        }
-        foreach (GameObject go in HideUI)
-        {
-            go.SetActive(false);
-        }
         Time.timeScale = 0f;
     }
 
