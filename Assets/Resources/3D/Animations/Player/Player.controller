@@ -39,12 +39,12 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0.004166677
-  m_ExitTime: 1
+  m_TransitionDuration: 0.23179606
+  m_TransitionOffset: 0.04458517
+  m_ExitTime: 0.9235123
   m_HasExitTime: 1
   m_HasFixedDuration: 1
-  m_InterruptionSource: 0
+  m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!91 &9100000
@@ -92,9 +92,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.056463998
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.010756185
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -108,7 +108,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Shoot
-  m_Speed: 1.2
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3520107995161592169}
@@ -121,7 +121,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 838e91de0ef20a048b9f47a9fb7cc3fb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 66ff8f2bf1f2a3a418ddb878023bdf94, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -135,7 +135,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Idle
-  m_Speed: 1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2359501581757879075}
@@ -148,7 +148,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dcee829d81c06424d8eb6263261a9009, type: 2}
+  m_Motion: {fileID: 7400000, guid: 37e9cd6783aff4a40af731d635841761, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

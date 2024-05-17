@@ -3979,7 +3979,7 @@ Transform:
   m_GameObject: {fileID: 1061984785623988787}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4208,7 +4208,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e30cdb468e9604a4f98d2a1f970dbb35, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -4318,15 +4318,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.06
+      value: 0.291
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.98
+      value: -0.772
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.57
+      value: 0.442
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4567,7 +4567,7 @@ PrefabInstance:
     - target: {fileID: 7603786706384944740, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8b4fa6b83c9300247acdbdac539db6bf, type: 2}
+      objectReference: {fileID: 2100000, guid: acf2c5abd593a094d89517f956fc7f1b, type: 2}
     - target: {fileID: 7790848670668113302, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -4587,7 +4587,7 @@ PrefabInstance:
     - target: {fileID: 8417361359673230750, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 79851b4b3703c154c966b09ec32c6135, type: 2}
+      objectReference: {fileID: 2100000, guid: 7d8ba7f8db2ff034383c6c046abc15b1, type: 2}
     - target: {fileID: 8719771546195959716, guid: 63d5676c2f388e44893a2c2762569d2a, type: 3}
       propertyPath: m_Layer
       value: 11
