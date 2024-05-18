@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEditor;
 
 
 public class GameStateManager : StateManager<GameStateManager.CoreStates>
@@ -12,7 +13,8 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     {
         Gameplay,
         Pause,
-        GameOver
+        GameOver,
+        GameWon
     }
 
     
@@ -20,10 +22,12 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     GameState gameState;
     PauseState pauseState;
     GameOverState gameoverState;
+    GameWonState wonstate;
 
     [SerializeField] GameObject GameplayUI;
     [SerializeField] GameObject PauseUI;
     [SerializeField] GameObject GameOverUI;
+    [SerializeField] GameObject GameWonUI;
     [SerializeField] Text Timer;
     [SerializeField] Text Collected;
 
@@ -34,10 +38,13 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         gameState = new GameState(CoreStates.Gameplay);
         pauseState = new PauseState(CoreStates.Pause);
         gameoverState = new GameOverState(CoreStates.GameOver);
+        wonstate = new GameWonState(CoreStates.GameWon);
 
         States.Add(CoreStates.Gameplay, gameState);
         States.Add(CoreStates.Pause, pauseState);
         States.Add(CoreStates.GameOver, gameoverState);
+        States.Add(CoreStates.GameWon, wonstate);
+
         SwitchState += ShowUI;
     }
 
@@ -62,6 +69,9 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
                 break;
             case CoreStates.GameOver:
                 GameOverUI.SetActive(true);
+                break;
+            case CoreStates.GameWon:
+                GameWonUI.SetActive(true);
                 break;
         }
     }

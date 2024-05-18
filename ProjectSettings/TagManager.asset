@@ -8,6 +8,7 @@ TagManager:
   - Box
   - Trolly
   - InUse
+  - Flash
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - End
   - Ignore
   - Gun/Hand
-  - 
+  - Bullet
   - 
   - 
   - 

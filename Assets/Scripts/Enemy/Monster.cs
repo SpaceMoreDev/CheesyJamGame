@@ -172,6 +172,8 @@ public class Monster : MonoBehaviour
                     {
                         counter.cheeseSc.interact(gameObject);
                         animator.SetTrigger("Eating");
+                        //playaudio eating
+
                     }
                 }
                 else if (target.TryGetComponent<Cheese>(out Cheese cheese))

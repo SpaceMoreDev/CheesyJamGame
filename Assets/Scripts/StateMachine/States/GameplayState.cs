@@ -25,6 +25,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
             {
                 instance.isGameWin = true;
                 Debug.Log("Won the game!!");
+
             }
         }
         get { 
@@ -79,6 +80,10 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         {
             cantransition = false;
             return GameStateManager.CoreStates.Pause;
+        }
+        if(isGameWin)
+        {
+            return GameStateManager.CoreStates.GameWon;
         }
         if (isGameOver)
         {
