@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEditor.PackageManager;
+using System.Numerics;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 public class Shooting : MonoBehaviour
 {
     
@@ -13,10 +16,17 @@ public class Shooting : MonoBehaviour
 
     public GameObject gun;
     public Camera mycam;
-    public GameObject player;
+    public GameObject muzzle;
+    public float smoketime;
+    //public float muzzletime;
+
+    [SerializeField] private GameObject player;
+    [SerializeField] private ParticleSystem smokeparticlesprefab;
+    //[SerializeField] private ParticleSystem muzzleflashprefab;
     [SerializeField] private GameObject _bulletholeprefab;
     [SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
+
 
     private CinemachineImpulseSource impulseSource;
 
@@ -36,6 +46,8 @@ public class Shooting : MonoBehaviour
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
+        smoketime = 1f;
+        //muzzletime = 2f;
     }
     void Update()
     {
@@ -49,9 +61,15 @@ public class Shooting : MonoBehaviour
 
                 Debug.DrawRay(hit.point, -mycam.transform.TransformDirection(Vector3.forward), Color.red,10f);
 
-                //Debug.Log($"Did Hit {hitobj.name}");
+
                 StartBlasting(hitobj);
-                
+
+                //Showing Smoke
+                StartCoroutine(SpawnParticles(smokeparticlesprefab,smoketime));
+
+                //Showing Muzzleflash
+                //StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
+
                 if (hitobj.CompareTag(entag))
                 {
                     if (hitobj.TryGetComponent<Monster>(out Monster monster))
@@ -59,8 +77,9 @@ public class Shooting : MonoBehaviour
                         monster.Die();
                     }
                 }
-                if(!hit.collider.gameObject.CompareTag(entag)||!hit.collider.gameObject.CompareTag(player.tag))
+                if(!hit.collider.gameObject.CompareTag(entag))
                 {
+                    Debug.Log(hit.collider.gameObject.tag);
                     //Instantiating the bullet hole object
                     GameObject obj = Instantiate(original: _bulletholeprefab, hit.point, Quaternion.LookRotation(hit.normal));
 
@@ -84,5 +103,12 @@ public class Shooting : MonoBehaviour
         {
             e_ShotObject.Invoke(myobj);
         }
+    }
+
+    IEnumerator SpawnParticles(ParticleSystem particleprefab,float lifetime)
+    {
+        particleprefab.gameObject.SetActive(true);
+        yield return new WaitForSeconds(lifetime);
+        particleprefab.gameObject.SetActive(false);
     }
 }
