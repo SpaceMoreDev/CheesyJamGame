@@ -11,6 +11,7 @@ public class StateManager<EState> : MonoBehaviour where EState : Enum
     protected bool IsTransitioningState = false;
 
     public event Action<EState> SwitchState;
+    public EState PreviousState;
 
     public void Start()
     {
@@ -34,10 +35,11 @@ public class StateManager<EState> : MonoBehaviour where EState : Enum
         }
     }
 
-    private void TransitionToState(EState stateKey)
+    public void TransitionToState(EState stateKey)
     {
         IsTransitioningState = true;
 
+        PreviousState = currentState.StateKey;
         currentState.ExitState();
         currentState = States[stateKey];
         currentState.EnterState();

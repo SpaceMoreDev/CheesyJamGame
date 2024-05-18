@@ -1,0 +1,94 @@
+[
+  {
+    "cutsceneIndex": 0,
+    "dialogues": [
+      {
+        "speaker": "Bob",
+        "line": "Psst... hey, Do you hear it? "
+      },
+      {
+        "speaker": "Bob",
+        "line": "Today's the day you've been waiting for.."
+      },
+      {
+        "speaker": "Bob",
+        "line": "yes, yes, it's here at last!"
+      },
+      {
+        "speaker": "Bob",
+        "line": "You must present it, your precious cheese! Yes, to THE ONE!"
+      },
+      {
+        "speaker": "Bob",
+        "line": "He awaits, oh yes, he does."
+      },
+      {
+        "speaker": "Bob",
+        "line": "And if he approves, oh, if he approves, he'll let us leave!"
+      },
+      {
+        "speaker": "Bob",
+        "line": "We'll be free, free from this wretched hell hole!"
+      },
+      {
+        "speaker": "Bob",
+        "line": "Ah, yes, yes! There's more you need to know, so much more! You can't carry the cheese by hand, oh no, no, no! It’s too precious, too delicate. "
+      }
+    ]
+  },
+  {
+    "cutsceneIndex": 1,
+    "dialogues": [
+      {
+        "speaker": "Bob",
+        "line": "But there is a way. Do you see it? The trolly! Yes, the old trolly! Rusty, creaky, but oh so useful."
+      },
+      {
+        "speaker": "Bob",
+        "line": "With that trolly, you can transport the cheese quickly, so quickly, to THE ONE."
+      },
+      {
+        "speaker": "Bob",
+        "line": "You can push, push with all your might! Glide through the halls, past the shadows, oh yes!"
+      },
+      {
+        "speaker": "Bob",
+        "line": "The trolly, the trolly, your only hope... Push it fast, push it silent... Escape this hell... escape..."
+      }
+    ]
+  },
+  {
+    "cutsceneIndex": 2,
+    "dialogues": [
+      {
+        "speaker": "Bob",
+        "line": "We must offer... more... MORE! this just wont do.."
+      },
+      {
+        "speaker": "Bob",
+        "line": "Did you hear that?"
+      }
+    ]
+  },
+  {
+    "cutsceneIndex": 3,
+    "dialogues": [
+      {
+        "speaker": "Bob",
+        "line": ". . ."
+      },
+      {
+        "speaker": "Bob",
+        "line": "Oh no, oh no, it's him. The abomination... the horror of both flesh and cheese... the Cheese Man"
+      },
+      {
+        "speaker": "Bob",
+        "line": "He’s a grotesque meld of flesh and cheese, a nightmare brought to life! His limbs... oh, they drip with the foul stench of spoiled dairy and rotting meat. Eyes like pits of soured cream, glaring hungrily, always searching, always seeking the precious cheese you carry"
+      },
+      {
+        "speaker": "Bob",
+        "line": "Cursed luck, cursed luck! Of all the days, why today? The Cheese Man won't let you have it, won't let you present it to THE ONE. No, no, no! He'll chase you, devour you, and feast on your hopes and dreams, along with your precious cheese!"
+      }
+    ]
+  }
+]

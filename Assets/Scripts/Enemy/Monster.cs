@@ -15,6 +15,7 @@ public class Monster : MonoBehaviour
     public static event Action ReachedDestination;
     [HideInInspector] public NavMeshAgent navMesh;
     public Animator animator;
+    public static Monster instance;
 
     [SerializeField] private float visionArea = 20f;
     [SerializeField] private float movementSpeed = 1f;
@@ -25,12 +26,17 @@ public class Monster : MonoBehaviour
     private IInteract targetBox;
     private bool isEscaping = false;
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         navMesh = GetComponent<NavMeshAgent>();
         ReachedDestination += Reached;
         navMesh.Warp(new Vector3(0, -50f, 0));
-        StartCoroutine(Spawn());
+        
     }
 
     public void Die() 
@@ -41,10 +47,10 @@ public class Monster : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    IEnumerator Spawn()
+    public IEnumerator Spawn()
     {
-        yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeToRespawn,maxTimeToRespawn));
-        isAlive = true;
+        yield return new WaitForSeconds(UnityEngine.Random.Range(instance.minTimeToRespawn, instance.maxTimeToRespawn));
+        instance.isAlive = true;
         SpawnManager.SetMonsterSpawn();
         checkTarget();
     }

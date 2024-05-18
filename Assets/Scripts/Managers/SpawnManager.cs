@@ -22,6 +22,16 @@ public class SpawnManager : MonoBehaviour
         monsterSc = monster.GetComponent<Monster>();
     }
 
+    public static void StartSpawn()
+    {
+        monsterSc.StartCoroutine(monsterSc.Spawn());
+    }
+    public static void StopSpawn()
+    {
+        monsterSc.isAlive = false;
+        monsterSc.navMesh.Warp(new Vector3(0,50,0));
+    }
+
     public static void SetMonsterSpawn()
     {
         if (monsterSc.isAlive)

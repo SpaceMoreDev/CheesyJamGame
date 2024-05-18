@@ -9,6 +9,21 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public Text timer;
     public Text Collected;
 
+    public bool spawnCheeseMan 
+    { set 
+        {
+            if (value)
+            {
+                SpawnManager.StartSpawn();
+            }
+            else
+            {
+                SpawnManager.StopSpawn();
+            }
+        
+        } 
+    }
+
     public bool isGameOver = false;
     public bool isGameWin = false;
 

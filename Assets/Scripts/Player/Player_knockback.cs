@@ -29,7 +29,7 @@ public class Player_knockback : MonoBehaviour
         {
             GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
             impulseSource = col.gameObject.GetComponent<CinemachineImpulseSource>();
-            CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+            //CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
         }
        
     }

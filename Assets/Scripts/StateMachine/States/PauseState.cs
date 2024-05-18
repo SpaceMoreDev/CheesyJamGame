@@ -5,6 +5,8 @@ using UnityEngine;
 public class PauseState : BaseState<GameStateManager.CoreStates>
 {
     public GameObject ShowUI;
+    GameStateManager.CoreStates previousState;
+    public bool paused = false;
 
     public PauseState(GameStateManager.CoreStates key) : base(key)
     {
@@ -15,13 +17,16 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
+        paused = true;
         Time.timeScale = 0f;
+        previousState = GameStateManager.instance.PreviousState;
     }
 
     public override void ExitState()
     {
         Debug.Log("-X- Left pause state");
+        Time.timeScale = 1f;
+        paused = false;
     }
 
     public override GameStateManager.CoreStates GetNextState()
@@ -29,13 +34,10 @@ public class PauseState : BaseState<GameStateManager.CoreStates>
         if (cantransition)
         {
             cantransition = false;
-            Time.timeScale = 1f;
-            return GameStateManager.CoreStates.Gameplay;
+            return previousState;
         }
 
         return GameStateManager.CoreStates.Pause;
-
-
     }
 
     public override void UpdateState()

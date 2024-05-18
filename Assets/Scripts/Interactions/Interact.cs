@@ -10,10 +10,15 @@ public class Interact : MonoBehaviour
     [SerializeField] private LayerMask layers;
     [SerializeField] private GameObject trolly;
     [SerializeField] private GameObject hand;
-
+    static public GameObject Camera;
     public static bool holding = false;
 
-private void Update()
+    private void Awake()
+    {
+        Camera = gameObject;
+    }
+
+    private void Update()
     {
         trolly.transform.position = transform.position;
 

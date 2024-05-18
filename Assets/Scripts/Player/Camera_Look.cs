@@ -5,7 +5,7 @@ using UnityEngine;
 public class Camera_Look : MonoBehaviour
 {
     public float mouseSensitivity = 500f;
-    public Camera mycam;
+    public GameObject mycam;
 
     private Transform playerBody;
 
@@ -15,7 +15,7 @@ public class Camera_Look : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mycam = Camera.main;
+        mycam = Interact.Camera;
         playerBody = transform;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
