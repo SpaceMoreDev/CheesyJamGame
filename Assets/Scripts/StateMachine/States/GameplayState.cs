@@ -8,7 +8,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public GameObject ShowUI;
     public Text timer;
     public Text Collected;
-
+    
     public bool spawnCheeseMan 
     { set 
         {

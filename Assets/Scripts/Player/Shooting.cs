@@ -11,9 +11,9 @@ public class Shooting : MonoBehaviour
     public static event Action<GameObject> e_ShotObject;
 
     public GameObject gun;
-    public Camera mycam;
+    public GameObject mycam;
 
-    [SerializeField] private Animator gunanim;
+    Animator animator;
     [SerializeField] ScreenShakeProfile profile;
 
     private CinemachineImpulseSource impulseSource;
@@ -28,7 +28,8 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mycam = Camera.main;
+        mycam = Interact.Camera;
+        animator = Interact.instance.animator;
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
@@ -37,7 +38,7 @@ public class Shooting : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            gunanim.SetTrigger("isfiring");
+            
 
             if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
             {
@@ -51,7 +52,10 @@ public class Shooting : MonoBehaviour
                 {
                     if (hitobj.TryGetComponent<Monster>(out Monster monster))
                     {
-                        monster.Die();
+                        if (monster.isAlive)
+                        {
+                            monster.Die();
+                        }
                     }
                 }
             }

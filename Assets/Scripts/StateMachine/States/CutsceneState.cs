@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -15,6 +16,8 @@ public class CutsceneState : BaseState<GameStateManager.CoreStates>
     }
     public override void EnterState()
     {
+        director.stopped += OnTimelineEnd;
+
         isFinished = false;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -24,28 +27,31 @@ public class CutsceneState : BaseState<GameStateManager.CoreStates>
     public override void ExitState()
     {
         Debug.Log("-X- Left Cutscene state");
-
+        director.stopped -= OnTimelineEnd;
 
     }
 
     public override GameStateManager.CoreStates GetNextState()
     {
-        if (isFinished)
+        if (cantransition)
         {
-            isFinished = false;
+            cantransition = false;
             return GameStateManager.CoreStates.Gameplay;
         }
 
         return GameStateManager.CoreStates.Cutscene;
     }
 
-    public override void UpdateState()
+    void OnTimelineEnd(PlayableDirector aDirector)
     {
-
-        if (director.state != PlayState.Playing && director.state != PlayState.Paused)
+        if (director == aDirector)
         {
             cantransition = true;
             isFinished = true;
         }
+    }
+
+    public override void UpdateState()
+    {
     }
 }

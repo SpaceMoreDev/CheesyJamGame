@@ -19,7 +19,8 @@ public class CheeseBucket : MonoBehaviour
         {
             if (cutscene != null)
             {
-                cutscene.Play();
+                GameStateManager.StartCutscene(cutscene);
+                Player_Gun.instance.isArmed = true;
                 played = true;
             }
            

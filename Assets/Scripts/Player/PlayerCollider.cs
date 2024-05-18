@@ -43,6 +43,8 @@ public class PlayerCollider : MonoBehaviour
                 Trolly.instance.cheeseCarried = 0;
 
                 bucket = cheeseBucket.bucket;
+
+                Player_Gun.instance.isArmed = true;
                 cheeseBucket.ReadyGame();
 
                 bucket.transform.DOMoveY(10, 2.5f).onComplete += () => { bucket.transform.DOMoveY(0, 2.5f); BucketCheeses.gameObject.SetActive(false); };
@@ -58,9 +60,12 @@ public class PlayerCollider : MonoBehaviour
         {
             if (col.gameObject.TryGetComponent(out Monster monster))
             {
-                GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
-                monster.animator.Play("Attack");
-                monster.gameObject.transform.LookAt(transform, Vector3.up);
+                if (monster.isAlive)
+                {
+                    GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
+                    monster.animator.Play("Attack");
+                    monster.gameObject.transform.LookAt(transform, Vector3.up);
+                }
             }
         }
     }

@@ -31,7 +31,7 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     [SerializeField] Text Timer;
     [SerializeField] Text Collected;
     [SerializeField] PlayableDirector introCutscene;
-
+    public bool skipIntro = false;
     bool ispaused = false;
 
     GameStateManager() {
@@ -81,14 +81,15 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         gameState.timer = Timer;
         gameState.Collected = Collected;
 
-        if (introCutscene != null)
-        {
-            StartCutscene(introCutscene);
-        }
-        else
+        if (introCutscene == null || skipIntro)
         {
             currentState = States[CoreStates.Gameplay];
         }
+        else
+        {
+            StartCutscene(introCutscene);
+        }
+        
     }
 
     private void Start()
@@ -117,12 +118,10 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
 
     private void Update()
     {
-
+        //print($"current state: {currentState}");
         base.Update();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ispaused = !ispaused;
-
             if (!ispaused)
             {
                 instance.TransitionToState(CoreStates.Pause);
@@ -131,6 +130,7 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
             {
                 currentState.cantransition = true;
             }
+            ispaused = !ispaused;
         }
     }
 }
