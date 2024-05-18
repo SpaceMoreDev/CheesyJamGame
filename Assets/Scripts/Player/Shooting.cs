@@ -18,11 +18,11 @@ public class Shooting : MonoBehaviour
     public Camera mycam;
     public GameObject muzzle;
     public float smoketime;
-    //public float muzzletime;
+    public float muzzletime;
 
     [SerializeField] private GameObject player;
     [SerializeField] private ParticleSystem smokeparticlesprefab;
-    //[SerializeField] private ParticleSystem muzzleflashprefab;
+    [SerializeField] private ParticleSystem muzzleflashprefab;
     [SerializeField] private GameObject _bulletholeprefab;
     [SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
@@ -41,18 +41,23 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        smokeparticlesprefab.Stop();
+        muzzleflashprefab.Stop();
         layermask = 1 << 3;
         mycam = Camera.main;
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
         smoketime = 1f;
-        //muzzletime = 2f;
+        muzzletime = 0.5f;
     }
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Showing Muzzleflash
+            StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
+
             gunanim.SetTrigger("isfiring");
 
             if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity,~layermask))
@@ -64,11 +69,10 @@ public class Shooting : MonoBehaviour
 
                 StartBlasting(hitobj);
 
+                
                 //Showing Smoke
                 StartCoroutine(SpawnParticles(smokeparticlesprefab,smoketime));
 
-                //Showing Muzzleflash
-                //StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
 
                 if (hitobj.CompareTag(entag))
                 {
@@ -107,8 +111,8 @@ public class Shooting : MonoBehaviour
 
     IEnumerator SpawnParticles(ParticleSystem particleprefab,float lifetime)
     {
-        particleprefab.gameObject.SetActive(true);
+        particleprefab.Play();
         yield return new WaitForSeconds(lifetime);
-        particleprefab.gameObject.SetActive(false);
+        particleprefab.Stop();
     }
 }
