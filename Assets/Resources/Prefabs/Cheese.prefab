@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6937830063407611568}
   - component: {fileID: 6690543915257921011}
   - component: {fileID: 1120458253261737895}
-  - component: {fileID: 6569072445724561638}
   - component: {fileID: 4645602334833456028}
+  - component: {fileID: 6724036997882479389}
   m_Layer: 8
   m_Name: Cheese
   m_TagString: Untagged
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5293283032645462933}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5495902117074765545, guid: c38d4130103e39e49962a62a38709e0f, type: 3}
 --- !u!23 &1120458253261737895
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b4fa6b83c9300247acdbdac539db6bf, type: 2}
+  - {fileID: 2100000, guid: a76a605649f035b4c80834bc9d711181, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6569072445724561638
+--- !u!114 &4645602334833456028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293283032645462933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871ec64b94e5dcd4fbfa62acce835d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countable: 1
+--- !u!65 &6724036997882479389
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,17 +117,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4645602334833456028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5293283032645462933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871ec64b94e5dcd4fbfa62acce835d68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Size: {x: 1.656, y: 1.656, z: 1.7301352}
+  m_Center: {x: 0, y: 0.828, z: 0.037067562}

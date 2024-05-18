@@ -25,13 +25,15 @@ public class Player_knockback : MonoBehaviour
     }
     private void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.TryGetComponent(out Monster monster))
         {
-            GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
-            impulseSource = col.gameObject.GetComponent<CinemachineImpulseSource>();
-            CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+            if (monster.isAlive)
+            {
+                impulseSource = col.gameObject.GetComponent<CinemachineImpulseSource>();
+                //CameraShakeManager.instance.ScreenShakeFromProfile(profile, impulseSource);
+            }
         }
-       
+
     }
     
 }

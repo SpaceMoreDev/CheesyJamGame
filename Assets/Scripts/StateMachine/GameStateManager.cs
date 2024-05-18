@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Playables;
 using UnityEditor;
 
 
@@ -13,24 +14,25 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     {
         Gameplay,
         Pause,
-        GameOver,
-        GameWon
+        Cutscene,
+        GameOver
     }
 
-    
+    public static GameStateManager instance;
 
     GameState gameState;
     PauseState pauseState;
     GameOverState gameoverState;
-    GameWonState wonstate;
+    CutsceneState cutsceneState;
+    [SerializeField] GameObject CullingCam;
 
     [SerializeField] GameObject GameplayUI;
     [SerializeField] GameObject PauseUI;
     [SerializeField] GameObject GameOverUI;
-    [SerializeField] GameObject GameWonUI;
     [SerializeField] Text Timer;
     [SerializeField] Text Collected;
-
+    [SerializeField] PlayableDirector introCutscene;
+    public bool skipIntro = false;
     bool ispaused = false;
 
     GameStateManager() {
@@ -38,14 +40,14 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         gameState = new GameState(CoreStates.Gameplay);
         pauseState = new PauseState(CoreStates.Pause);
         gameoverState = new GameOverState(CoreStates.GameOver);
-        wonstate = new GameWonState(CoreStates.GameWon);
+        cutsceneState = new CutsceneState(CoreStates.Cutscene);
 
         States.Add(CoreStates.Gameplay, gameState);
         States.Add(CoreStates.Pause, pauseState);
         States.Add(CoreStates.GameOver, gameoverState);
-        States.Add(CoreStates.GameWon, wonstate);
-
+        States.Add(CoreStates.Cutscene, cutsceneState);
         SwitchState += ShowUI;
+        instance = this;
     }
 
     private void OnDestroy()
@@ -70,8 +72,7 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
             case CoreStates.GameOver:
                 GameOverUI.SetActive(true);
                 break;
-            case CoreStates.GameWon:
-                GameWonUI.SetActive(true);
+            case CoreStates.Cutscene:
                 break;
         }
     }
@@ -80,23 +81,58 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     {
         gameState.timer = Timer;
         gameState.Collected = Collected;
-        currentState = States[CoreStates.Gameplay];
+        gameState.CullingCamera = CullingCam;
+
+
+        if (introCutscene == null || skipIntro)
+        {
+            currentState = States[CoreStates.Gameplay];
+        }
+        else
+        {
+            StartCutscene(introCutscene);
+        }
+        
     }
 
     private void Start()
     {
         base.Start();
+        PreviousState = currentState.StateKey;
         DontDestroyOnLoad(gameObject);
+
+    }
+
+    public static void StartCutscene(PlayableDirector director)
+    {
+        director.Play();
+        instance.cutsceneState.director = director;
+        if (currentState != null)
+        {
+            instance.TransitionToState(CoreStates.Cutscene);
+        }
+        else
+        {
+            currentState = instance.cutsceneState;
+            instance.ShowUI(CoreStates.Cutscene);
+        }
 
     }
 
     private void Update()
     {
+        //print($"current state: {currentState}");
         base.Update();
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            currentState.cantransition = true;
+            if (!ispaused)
+            {
+                instance.TransitionToState(CoreStates.Pause);
+            }
+            else
+            {
+                currentState.cantransition = true;
+            }
             ispaused = !ispaused;
         }
     }

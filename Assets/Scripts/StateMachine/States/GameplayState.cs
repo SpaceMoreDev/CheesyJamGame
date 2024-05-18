@@ -8,6 +8,22 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public GameObject ShowUI;
     public Text timer;
     public Text Collected;
+    public GameObject CullingCamera;
+
+    public bool spawnCheeseMan 
+    { set 
+        {
+            if (value)
+            {
+                SpawnManager.StartSpawn();
+            }
+            else
+            {
+                SpawnManager.StopSpawn();
+            }
+        
+        } 
+    }
 
     public bool isGameOver = false;
     public bool isGameWin = false;
@@ -60,6 +76,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
+        CullingCamera.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -72,6 +89,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public override void ExitState()
     {
         Debug.Log("-X- Left gameplay state");
+        CullingCamera.SetActive(false);
     }
 
     public override GameStateManager.CoreStates GetNextState()

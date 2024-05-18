@@ -11,7 +11,7 @@ public class PlayerCollider : MonoBehaviour
 
     private void Start()
     {
-        mycam = Camera.main.gameObject;
+        mycam = Interact.Camera;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,11 +20,12 @@ public class PlayerCollider : MonoBehaviour
         {
             if (Interact.holding && Trolly.instance.cheeseCarried > 0)
             {
+                CheeseBucket cheeseBucket = other.GetComponent<CheeseBucket>();
                 print("checking cheese");
 
                 GameState.collectedCheese += Trolly.instance.cheeseCarried;
 
-                Transform BucketCheeses = other.GetComponent<CheeseBucket>().bucketCheeses.transform;
+                Transform BucketCheeses = cheeseBucket.bucketCheeses.transform;
                 BucketCheeses.gameObject.SetActive(true);
 
                 for (int i = 0;  i< BucketCheeses.childCount; i++)
@@ -41,8 +42,10 @@ public class PlayerCollider : MonoBehaviour
 
                 Trolly.instance.cheeseCarried = 0;
 
-                bucket = other.GetComponent<CheeseBucket>().bucket;
-                
+                bucket = cheeseBucket.bucket;
+
+                Player_Gun.instance.isArmed = true;
+                cheeseBucket.ReadyGame();
 
                 bucket.transform.DOMoveY(10, 2.5f).onComplete += () => { bucket.transform.DOMoveY(0, 2.5f); BucketCheeses.gameObject.SetActive(false); };
             }
@@ -57,9 +60,12 @@ public class PlayerCollider : MonoBehaviour
         {
             if (col.gameObject.TryGetComponent(out Monster monster))
             {
-                GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
-                monster.animator.Play("Attack");
-                monster.gameObject.transform.LookAt(transform, Vector3.up);
+                if (monster.isAlive)
+                {
+                    GetComponent<Rigidbody>().AddForce(mycam.transform.forward * -pushforce, ForceMode.Impulse);
+                    monster.animator.Play("Attack");
+                    monster.gameObject.transform.LookAt(transform, Vector3.up);
+                }
             }
         }
     }
