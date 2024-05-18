@@ -8,6 +8,9 @@ using UnityEditor.PackageManager;
 using System.Numerics;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using UnityEngine.UI;
+using Unity.VisualScripting;
+using DG.Tweening;
 public class Shooting : MonoBehaviour
 {
     
@@ -22,11 +25,11 @@ public class Shooting : MonoBehaviour
 
     [SerializeField] private GameObject player;
     [SerializeField] private ParticleSystem smokeparticlesprefab;
-    [SerializeField] private ParticleSystem muzzleflashprefab;
+   // [SerializeField] private ParticleSystem muzzleflashprefab;
     [SerializeField] private GameObject _bulletholeprefab;
     [SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
-
+    [SerializeField] private GameObject muzzleflash;
 
     private CinemachineImpulseSource impulseSource;
 
@@ -42,7 +45,7 @@ public class Shooting : MonoBehaviour
     void Start()
     {
         smokeparticlesprefab.Stop();
-        muzzleflashprefab.Stop();
+        //muzzleflashprefab.Stop();
         layermask = 1 << 3;
         mycam = Camera.main;
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
@@ -56,12 +59,14 @@ public class Shooting : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Showing Muzzleflash
-            StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
+            //StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
 
             gunanim.SetTrigger("isfiring");
 
+            StartCoroutine(activateflash());
             if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity,~layermask))
             {
+                Debug.Log(hit.point);
                 hitobj = hit.collider.gameObject;
 
                 Debug.DrawRay(hit.point, -mycam.transform.TransformDirection(Vector3.forward), Color.red,10f);
@@ -81,7 +86,7 @@ public class Shooting : MonoBehaviour
                         monster.Die();
                     }
                 }
-                if(!hit.collider.gameObject.CompareTag(entag))
+                if(!hit.collider.gameObject.CompareTag(entag) && !hit.collider.gameObject.CompareTag("Flash"))
                 {
                     Debug.Log(hit.collider.gameObject.tag);
                     //Instantiating the bullet hole object
@@ -114,5 +119,12 @@ public class Shooting : MonoBehaviour
         particleprefab.Play();
         yield return new WaitForSeconds(lifetime);
         particleprefab.Stop();
+    }
+
+    IEnumerator activateflash()
+    {
+        muzzleflash.GetComponent<SpriteRenderer>().DOFade(255,0.1f);
+        yield return new WaitForSeconds(0.1f);
+        muzzleflash.GetComponent<SpriteRenderer>().DOFade(0, 0.1f);
     }
 }
