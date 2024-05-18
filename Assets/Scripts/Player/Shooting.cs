@@ -30,6 +30,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
     [SerializeField] private GameObject muzzleflash;
+    [SerializeField] private AudioSource AudioSource;
+
 
     private CinemachineImpulseSource impulseSource;
 
@@ -64,6 +66,9 @@ public class Shooting : MonoBehaviour
             gunanim.SetTrigger("isfiring");
 
             StartCoroutine(activateflash());
+
+            Playaudio();
+
             if (Physics.Raycast(mycam.transform.position, mycam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity,~layermask))
             {
                 Debug.Log(hit.point);
@@ -126,5 +131,10 @@ public class Shooting : MonoBehaviour
         muzzleflash.GetComponent<SpriteRenderer>().DOFade(255,0.1f);
         yield return new WaitForSeconds(0.1f);
         muzzleflash.GetComponent<SpriteRenderer>().DOFade(0, 0.1f);
+    }
+
+    void Playaudio()
+    {
+        AudioSource.Play();
     }
 }
