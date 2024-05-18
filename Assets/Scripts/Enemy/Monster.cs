@@ -41,7 +41,7 @@ public class Monster : MonoBehaviour
         navMesh = GetComponent<NavMeshAgent>();
         ReachedDestination += Reached;
         navMesh.Warp(new Vector3(0, -20f, 0));
-        GameState.instance.spawnCheeseMan = true; // remove
+        //GameState.instance.spawnCheeseMan = true; // remove
 
     }
 
@@ -51,7 +51,7 @@ public class Monster : MonoBehaviour
         canMove = false;
         isAlive = false;
         //navMesh.Warp(new Vector3(0, -50f, 0));
-
+        cheeseDust.Stop();
         switch (UnityEngine.Random.Range(0,2))
         {
             case 0:

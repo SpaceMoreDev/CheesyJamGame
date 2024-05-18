@@ -4891,7 +4891,7 @@ MonoBehaviour:
   searchDelay: 5
   navMesh: {fileID: 0}
   animator: {fileID: 3890770604243816131}
-  visionArea: 20
+  visionArea: 50
   movementSpeed: 0.5
   targetLayers:
     serializedVersion: 2

@@ -16,10 +16,15 @@ public class Interact : MonoBehaviour
     static public GameObject Camera;
     public static bool holding = false;
     public Animator animator;
+
+    public Interact()
+    {
+    }
+
     private void Awake()
     {
-        instance = this;    
         Camera = gameObject;
+        instance = this;    
     }
 
     private IEnumerator SetBoolForOneFrame(string parameterName)

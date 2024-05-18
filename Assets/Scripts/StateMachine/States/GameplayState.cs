@@ -8,7 +8,8 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public GameObject ShowUI;
     public Text timer;
     public Text Collected;
-    
+    public GameObject CullingCamera;
+
     public bool spawnCheeseMan 
     { set 
         {
@@ -74,6 +75,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 
     public override void EnterState()
     {
+        CullingCamera.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -86,6 +88,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public override void ExitState()
     {
         Debug.Log("-X- Left gameplay state");
+        CullingCamera.SetActive(false);
     }
 
     public override GameStateManager.CoreStates GetNextState()

@@ -24,7 +24,8 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     PauseState pauseState;
     GameOverState gameoverState;
     CutsceneState cutsceneState;
-    
+    [SerializeField] GameObject CullingCam;
+
     [SerializeField] GameObject GameplayUI;
     [SerializeField] GameObject PauseUI;
     [SerializeField] GameObject GameOverUI;
@@ -80,6 +81,8 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     {
         gameState.timer = Timer;
         gameState.Collected = Collected;
+        gameState.CullingCamera = CullingCam;
+
 
         if (introCutscene == null || skipIntro)
         {

@@ -42,20 +42,17 @@ public class SpawnManager : MonoBehaviour
 
     public static void SetMonsterSpawn()
     {
-        if (monsterSc.isAlive)
-        {
-            int randompoint = Random.Range(0, instance.spawnLocations.Count);
+
+        int randompoint = Random.Range(0, instance.spawnLocations.Count);
 
 
-            Vector3 direction = instance.spawnLocations[randompoint].position + instance.spawnLocations[randompoint].right*2 + instance.spawnLocations[randompoint].up ;
+        Vector3 direction = instance.spawnLocations[randompoint].position + instance.spawnLocations[randompoint].right*2 + instance.spawnLocations[randompoint].up ;
 
-            monsterSc.navMesh.Warp(direction);
-            Quaternion rotation = Quaternion.LookRotation(direction - (instance.spawnLocations[randompoint].position + instance.spawnLocations[randompoint].up), Vector3.up);
-            //rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-            monsterSc.transform.rotation = rotation;
-            monsterSc.animator.Play("Entering");
-
-        }
+        monsterSc.navMesh.Warp(direction);
+        Quaternion rotation = Quaternion.LookRotation(direction - (instance.spawnLocations[randompoint].position + instance.spawnLocations[randompoint].up), Vector3.up);
+        //rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+        monsterSc.transform.rotation = rotation;
+        monsterSc.animator.Play("Entering");
     }
 
 }
