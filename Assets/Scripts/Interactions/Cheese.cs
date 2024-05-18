@@ -3,7 +3,7 @@ using UnityEngine;
 public class Cheese : MonoBehaviour, IInteract
 {
     [SerializeField] bool countable = true;
-    private void OnEnable()
+    private void Start()
     {
         if (countable)
         {

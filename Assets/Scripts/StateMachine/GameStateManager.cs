@@ -15,7 +15,8 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         Gameplay,
         Pause,
         Cutscene,
-        GameOver
+        GameOver,
+        GameWon
     }
 
     public static GameStateManager instance;
@@ -24,8 +25,11 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
     PauseState pauseState;
     GameOverState gameoverState;
     CutsceneState cutsceneState;
+    GameWonState wonstate;
+
     [SerializeField] GameObject CullingCam;
 
+    [SerializeField] GameObject GameWonUI;
     [SerializeField] GameObject GameplayUI;
     [SerializeField] GameObject PauseUI;
     [SerializeField] GameObject GameOverUI;
@@ -41,11 +45,14 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
         pauseState = new PauseState(CoreStates.Pause);
         gameoverState = new GameOverState(CoreStates.GameOver);
         cutsceneState = new CutsceneState(CoreStates.Cutscene);
+        wonstate = new GameWonState(CoreStates.GameWon);
 
         States.Add(CoreStates.Gameplay, gameState);
         States.Add(CoreStates.Pause, pauseState);
         States.Add(CoreStates.GameOver, gameoverState);
         States.Add(CoreStates.Cutscene, cutsceneState);
+        States.Add(CoreStates.GameWon, wonstate);
+
         SwitchState += ShowUI;
         instance = this;
     }
@@ -73,6 +80,9 @@ public class GameStateManager : StateManager<GameStateManager.CoreStates>
                 GameOverUI.SetActive(true);
                 break;
             case CoreStates.Cutscene:
+                break;
+            case CoreStates.GameWon:
+                GameWonUI.SetActive(true);
                 break;
         }
     }

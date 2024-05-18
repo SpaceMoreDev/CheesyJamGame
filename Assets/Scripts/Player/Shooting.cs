@@ -18,7 +18,7 @@ public class Shooting : MonoBehaviour
     public static event Action<GameObject> e_ShotObject;
 
     public GameObject gun;
-    public Camera mycam;
+    public GameObject mycam;
     public GameObject muzzle;
     public float smoketime;
     public float muzzletime;
@@ -27,7 +27,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private ParticleSystem smokeparticlesprefab;
    // [SerializeField] private ParticleSystem muzzleflashprefab;
     [SerializeField] private GameObject _bulletholeprefab;
-    [SerializeField] private Animator gunanim;
+    //[SerializeField] private Animator gunanim;
     [SerializeField] ScreenShakeProfile profile;
     [SerializeField] private GameObject muzzleflash;
     [SerializeField] private AudioSource AudioSource;
@@ -49,7 +49,7 @@ public class Shooting : MonoBehaviour
         smokeparticlesprefab.Stop();
         //muzzleflashprefab.Stop();
         layermask = 1 << 3;
-        mycam = Camera.main;
+        mycam = Interact.Camera;
         impulseSource = gun.GetComponent<CinemachineImpulseSource>();
         //gunanim = gun.GetComponent<Animator>();
         entag = "Enemy";
@@ -63,7 +63,7 @@ public class Shooting : MonoBehaviour
             //Showing Muzzleflash
             //StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
 
-            gunanim.SetTrigger("isfiring");
+            //gunanim.SetTrigger("isfiring");
 
             StartCoroutine(activateflash());
 
