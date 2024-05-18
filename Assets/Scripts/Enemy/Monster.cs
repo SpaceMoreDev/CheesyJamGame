@@ -23,6 +23,9 @@ public class Monster : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private ParticleSystem cheeseDust;
 
+    [SerializeField] AudioSource eatingcheese;
+    //[SerializeField] AudioSource dying;
+
     private bool canMove = false;
     private Transform target;
     private Transform looktarget;
@@ -38,6 +41,9 @@ public class Monster : MonoBehaviour
 
     private void Start()
     {
+        
+        eatingcheese = GetComponent<AudioSource>();
+        //dying = GetComponent<AudioSource>();
         navMesh = GetComponent<NavMeshAgent>();
         ReachedDestination += Reached;
         navMesh.Warp(new Vector3(0, -20f, 0));
@@ -224,6 +230,8 @@ public class Monster : MonoBehaviour
                     {
                         counter.cheeseSc.interact(gameObject);
                         animator.SetTrigger("Eating");
+
+                        eatingcheese.Play();
                         cheeseDust.Play();
 
                     }
@@ -231,11 +239,13 @@ public class Monster : MonoBehaviour
                 else if (target.TryGetComponent<Cheese>(out Cheese cheese))
                 {
                     animator.SetTrigger("Eating");
+                    eatingcheese.Play();
                     cheeseDust.Play();
                 }
                 else if (target.TryGetComponent<Trolly>(out Trolly trolly))
                 {
                     animator.SetTrigger("Eating");
+                    eatingcheese.Play();
                     cheeseDust.Play();
 
                 }
