@@ -16,10 +16,10 @@ public class audioVolumeSlider : MonoBehaviour
     {
         PlayerPrefs.SetFloat("volume",volumeSlider.value);
         PlayerPrefs.Save();
+        AudioListener.volume = PlayerPrefs.GetFloat("volume");
     }
 
     private void Update()
     {
-        AudioListener.volume = PlayerPrefs.GetFloat("volume");
     }
 }

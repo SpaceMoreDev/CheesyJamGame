@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
+//using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class CheeseBucket : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class CheeseBucket : MonoBehaviour
     public GameObject bucket;
     [SerializeField] private LineRenderer line;
     [SerializeField] private PlayableDirector cutscene;
+    [SerializeField] public ParticleSystem cheesefall;
 
     public Transform bucketCheeses;
 
