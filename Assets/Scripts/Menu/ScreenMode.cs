@@ -28,6 +28,6 @@ public class ScreenMode : MonoBehaviour
         {
             Screen.fullScreen = false;
         }
-       
+        Debug.Log("poopoo");
     }
 }

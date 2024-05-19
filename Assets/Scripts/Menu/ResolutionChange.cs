@@ -13,16 +13,17 @@ public class ResolutionChange : MonoBehaviour
     void Start()
     {
         resoldrop = this.GetComponent<TMP_Dropdown>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(screenmode.value == 0)
+        if (screenmode.value == 0)
         {
             fullscreenmode = true;
         }
-        else if(screenmode.value == 1)
+        else if (screenmode.value == 1)
         {
             fullscreenmode = false;
         }
@@ -109,7 +110,7 @@ public class ResolutionChange : MonoBehaviour
                 PlayerPrefs.SetInt("height", 1600);
             }
         }
-
+        Debug.Log("penis");
 
     }
 }
