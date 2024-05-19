@@ -7,20 +7,12 @@ using UnityEngine;
 public class Player_Gun : MonoBehaviour
 {
     public static  Player_Gun instance;
-    public bool isArmed = true;
-    public bool Armed { set {
-            if (value)
-            {
-                Interact.instance.animator.SetBool("Armed", true);
-                print("armed and ready");
-            }
-            else
-            {
-                Interact.instance.animator.SetBool("Armed", false);
-                print("unarmed");
-            }
+    private bool isArmed = false;
+    public static bool Armed { set {
+
             instance.isArmed = value;
 
+            Interact.instance.SetArmed(value);
 
         } get { return instance.isArmed; } }
     GameObject thecamera;
@@ -36,8 +28,6 @@ public class Player_Gun : MonoBehaviour
     {
         thecamera = Interact.Camera;
         newRotation = thecamera.transform.rotation;
-
-        Armed = false;
     }
 
     private void Update()

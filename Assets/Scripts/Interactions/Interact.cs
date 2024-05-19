@@ -13,6 +13,7 @@ public class Interact : MonoBehaviour
     [SerializeField] private LayerMask layers;
     [SerializeField] private GameObject trolly;
     [SerializeField] private GameObject hand;
+    [SerializeField] private GameObject gun;
     static public GameObject Camera;
     public static bool holding = false;
     public Animator animator;
@@ -25,6 +26,11 @@ public class Interact : MonoBehaviour
     {
         Camera = gameObject;
         instance = this;    
+    }
+
+    public void SetArmed(bool val)
+    {
+        animator.SetBool("isArmed", val);
     }
 
     private IEnumerator SetBoolForOneFrame(string parameterName)
@@ -49,7 +55,8 @@ public class Interact : MonoBehaviour
             if (holding)
             {
                 holding = false;
-                hand.SetActive(true);
+                hand.GetComponent<SkinnedMeshRenderer>().enabled = true;
+                gun.GetComponent<SkinnedMeshRenderer>().enabled = true;
 
             }
             else
@@ -64,7 +71,9 @@ public class Interact : MonoBehaviour
                         if (hit.collider.tag == "Trolly")
                         {
                             interactedObj.interact(trolly.transform.GetChild(0).gameObject);
-                            hand.SetActive(false);
+                            hand.GetComponent<SkinnedMeshRenderer>().enabled = false;
+                            gun.GetComponent<SkinnedMeshRenderer>().enabled = false;
+
                         }
                         else
                         {
@@ -75,7 +84,7 @@ public class Interact : MonoBehaviour
             }
 
         }
-        else if (Input.GetMouseButtonDown(0) && Player_Gun.instance.isArmed)
+        else if (Input.GetMouseButtonDown(0) && Player_Gun.Armed)
         {
            StartCoroutine(SetBoolForOneFrame("isfiring"));
         }

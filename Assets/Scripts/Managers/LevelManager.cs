@@ -42,6 +42,7 @@ public class LevelManager : MonoBehaviour
     public static void StartGame()
     {
         GameState.instance.spawnCheeseMan = true;
+        Player_Gun.Armed = true;
     }
 
     public static void EndGame()

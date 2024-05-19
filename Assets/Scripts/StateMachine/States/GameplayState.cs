@@ -55,7 +55,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
         {
             instance.cheeseCount = value;
 
-            if (value == 0)
+            if (value == 0 || value == collectedCheese)
             {
                 instance.isGameOver = true;
             }
@@ -72,6 +72,7 @@ public class GameState : BaseState<GameStateManager.CoreStates>
     public GameState(GameStateManager.CoreStates key) : base(key)
     {
         instance = this;
+        elapsedTime = 0f;
     }
 
     public override void EnterState()
@@ -110,19 +111,17 @@ public class GameState : BaseState<GameStateManager.CoreStates>
 
         return GameStateManager.CoreStates.Gameplay;
     }
-
+    private float elapsedTime=0f;
     public override void UpdateState()
     {
         if (timer != null)
         {
-            float totalSeconds = Time.timeSinceLevelLoad;
+            elapsedTime += Time.deltaTime;  // Increment elapsed time by the time that has passed since the last frame
 
-            int seconds = Mathf.FloorToInt(totalSeconds);
-            int minutes = Mathf.FloorToInt(totalSeconds / 60f);
+            int minutes = Mathf.FloorToInt(elapsedTime / 60F);  // Calculate the minutes
+            int seconds = Mathf.FloorToInt(elapsedTime % 60F);  // Calculate the seconds
 
-            string formattedTime = string.Format("{0:00}:{1:00}", minutes, seconds);
-
-            timer.text = formattedTime;
+            timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
         }
     }
 }

@@ -56,6 +56,8 @@ public class Monster : MonoBehaviour
     {
         canMove = false;
         isAlive = false;
+        GetComponent<Collider>().enabled = false;
+
         //navMesh.Warp(new Vector3(0, -50f, 0));
         cheeseDust.Stop();
         switch (UnityEngine.Random.Range(0,2))
@@ -89,6 +91,7 @@ public class Monster : MonoBehaviour
         
         SpawnManager.SetMonsterSpawn();
         yield return new WaitForSeconds(2);
+        GetComponent<Collider>().enabled = true;
         navMesh.enabled = true;
         isAlive = true;
 

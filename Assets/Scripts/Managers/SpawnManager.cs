@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
     public void SpawnCheeseMan()
     {
         LevelManager.StartGame();
-        
+
     }
 
     public static void SetMonsterSpawn()

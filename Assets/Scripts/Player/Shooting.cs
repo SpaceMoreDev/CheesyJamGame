@@ -41,7 +41,7 @@ public class Shooting : MonoBehaviour
     private RaycastHit hit;
     private GameObject hitobj;
     private int layermask;
-
+    [SerializeField] LayerMask decalLayers;
 
 
     // Start is called before the first frame update
@@ -59,7 +59,7 @@ public class Shooting : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Player_Gun.Armed)
         {
             //Showing Muzzleflash
             //StartCoroutine(SpawnParticles(muzzleflashprefab, muzzletime));
@@ -92,14 +92,14 @@ public class Shooting : MonoBehaviour
                         monster.Die();
                     }
                 }
-                if(!hit.collider.gameObject.CompareTag(entag) && !hit.collider.gameObject.CompareTag("Flash"))
+                if(!hit.collider.gameObject.CompareTag(entag) && !hit.collider.gameObject.CompareTag("Flash") && Includes(decalLayers, hit.collider.gameObject.layer))
                 {
                     Debug.Log(hit.collider.gameObject.tag);
                     //Instantiating the bullet hole object
                     GameObject obj = Instantiate(original: _bulletholeprefab, hit.point, Quaternion.LookRotation(hit.normal));
 
                     //Modifying the position so it looks better
-                    //obj.transform.position += obj.transform.forward;
+                    obj.transform.position += obj.transform.forward/300;
                     Destroy(obj, 3f);
                 }
                 
@@ -112,6 +112,14 @@ public class Shooting : MonoBehaviour
 
         }
     }
+
+    public bool Includes(
+          LayerMask mask,
+          int layer)
+    {
+        return (mask.value & 1 << layer) > 0;
+    }
+
     public static void StartBlasting(GameObject myobj)
     {
         if(e_ShotObject != null) 

@@ -44,7 +44,7 @@ public class PlayerCollider : MonoBehaviour
 
                 bucket = cheeseBucket.bucket;
 
-                Player_Gun.instance.isArmed = true;
+                
                 cheeseBucket.ReadyGame();
 
                 bucket.transform.DOMoveY(10, 2.5f).onComplete += () => { bucket.transform.DOMoveY(0, 2.5f); BucketCheeses.gameObject.SetActive(false); cheeseBucket.cheesefall.Play(); };
