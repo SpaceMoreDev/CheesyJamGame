@@ -37,7 +37,7 @@ public class Player_Gun : MonoBehaviour
         thecamera = Interact.Camera;
         newRotation = thecamera.transform.rotation;
 
-        Armed = true;
+        Armed = false;
     }
 
     private void Update()

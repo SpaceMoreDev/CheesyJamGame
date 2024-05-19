@@ -13,21 +13,22 @@ using Unity.VisualScripting;
 using DG.Tweening;
 public class Shooting : MonoBehaviour
 {
-    
-
     public static event Action<GameObject> e_ShotObject;
 
     public GameObject gun;
     public GameObject mycam;
     public GameObject muzzle;
+
     public float smoketime;
     public float muzzletime;
 
     [SerializeField] private GameObject player;
     [SerializeField] private ParticleSystem smokeparticlesprefab;
    // [SerializeField] private ParticleSystem muzzleflashprefab;
+
     [SerializeField] private GameObject _bulletholeprefab;
     //[SerializeField] private Animator gunanim;
+
     [SerializeField] ScreenShakeProfile profile;
     [SerializeField] private GameObject muzzleflash;
     [SerializeField] private AudioSource AudioSource;
@@ -98,7 +99,7 @@ public class Shooting : MonoBehaviour
                     GameObject obj = Instantiate(original: _bulletholeprefab, hit.point, Quaternion.LookRotation(hit.normal));
 
                     //Modifying the position so it looks better
-                    obj.transform.position += obj.transform.forward / 300;
+                    //obj.transform.position += obj.transform.forward;
                     Destroy(obj, 3f);
                 }
                 
