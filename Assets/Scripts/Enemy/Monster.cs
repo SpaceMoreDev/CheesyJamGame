@@ -23,8 +23,8 @@ public class Monster : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
     [SerializeField] private ParticleSystem cheeseDust;
 
-    [SerializeField] AudioSource eatingcheese;
-    //[SerializeField] AudioSource dying;
+    [SerializeField] AudioClip[] audioclips;
+    [SerializeField] AudioSource enaudio;
 
     private bool canMove = false;
     private Transform target;
@@ -42,8 +42,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         
-        eatingcheese = GetComponent<AudioSource>();
-        //dying = GetComponent<AudioSource>();
+        enaudio = GetComponent<AudioSource>();
         navMesh = GetComponent<NavMeshAgent>();
         ReachedDestination += Reached;
         navMesh.Warp(new Vector3(0, -20f, 0));
@@ -64,9 +63,11 @@ public class Monster : MonoBehaviour
         {
             case 0:
                 animator.Play("Die1");
+                enaudio.PlayOneShot(audioclips[2]);
                 break;
             default:
                 animator.Play("Die2");
+                enaudio.PlayOneShot(audioclips[2]);
                 break;
         }
         transform.LookAt(Interact.Camera.transform.position, Vector3.up);
@@ -158,6 +159,7 @@ public class Monster : MonoBehaviour
         {
             navMesh.destination = target.position;
             animator.SetBool("isMoving", true);
+            enaudio.PlayOneShot(audioclips[1]);
             canMove = true; // will be set via animation later on
         }
         else {
@@ -180,6 +182,7 @@ public class Monster : MonoBehaviour
 
             isEscaping = true;
             animator.SetBool("isMoving", true);
+            enaudio.PlayOneShot(audioclips[1]);
             canMove = true; // will be set via animation later on
         }
 
@@ -218,7 +221,7 @@ public class Monster : MonoBehaviour
         navMesh.ResetPath();
 
         animator.SetBool("isMoving", false);
-
+        enaudio.PlayOneShot(audioclips[1]);
 
         if (!isEscaping)
         {
@@ -233,8 +236,9 @@ public class Monster : MonoBehaviour
                     {
                         counter.cheeseSc.interact(gameObject);
                         animator.SetTrigger("Eating");
-
-                        eatingcheese.Play();
+                        enaudio.PlayOneShot(audioclips[0]);
+                        //enaudio.Play();
+                        //eatingcheese.Play();
                         cheeseDust.Play();
 
                     }
@@ -242,13 +246,13 @@ public class Monster : MonoBehaviour
                 else if (target.TryGetComponent<Cheese>(out Cheese cheese))
                 {
                     animator.SetTrigger("Eating");
-                    eatingcheese.Play();
+                    enaudio.PlayOneShot(audioclips[0]);
                     cheeseDust.Play();
                 }
                 else if (target.TryGetComponent<Trolly>(out Trolly trolly))
                 {
                     animator.SetTrigger("Eating");
-                    eatingcheese.Play();
+                    enaudio.PlayOneShot(audioclips[0]);
                     cheeseDust.Play();
 
                 }

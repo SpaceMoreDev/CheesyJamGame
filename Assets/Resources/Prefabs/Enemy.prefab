@@ -4898,8 +4898,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   cheeseDust: {fileID: 703105919109567572}
-  eatingcheese: {fileID: 524003163883511211}
-  dying: {fileID: 0}
+  audioclips:
+  - {fileID: 8300000, guid: 23cfadc5d19b43244b4ed56702b54180, type: 3}
+  - {fileID: 8300000, guid: b3a0b6dfc9ca0e2469fd6e0460932445, type: 3}
+  - {fileID: 8300000, guid: ed42b99b869aadc4e825ef7003fb9940, type: 3}
+  enaudio: {fileID: 0}
 --- !u!195 &3452368373494431660
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5008,7 +5011,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 23cfadc5d19b43244b4ed56702b54180, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
